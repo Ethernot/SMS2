@@ -1,0 +1,76 @@
+@font-face {
+    font-family: Titlefont;
+    src: url(orange%20juice%202.0.ttf);
+}
+
+@font-face {
+    font-family: mainFont;
+    src: url(DJB%20Tweenybopper.ttf);
+}
+
+body {
+    background-color: #666666;
+}
+
+.mainHeader {
+    width: 100%;
+    height: auto;
+    float: none;
+    background-color: #FFF;
+    margin: 0 0;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
+
+.mainHeader h1 {
+    font-family: Titlefont;
+    font-size: 100px;
+    text-align: center;
+}
+
+.mainHeader p {
+    font-family: Arial;
+    font-size: 15px;
+    text-align: center;
+    color: #666666;
+}
+
+.mainFooter {
+    width: 100%;
+    height: 40px;
+    float: left;
+    clear: both;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    background-color: #FFF;
+    margin: 2% 0;
+}
+
+.mainFooter p {
+    width: 92%;
+    margin: 1% auto;
+}
+
+.mainContainer {
+    width: 70%;
+    float: none;
+    background-color: #FFFFFF;
+    text-align: center;
+    font-family: mainFont;
+    font-size: 25px;
+}
+
+.mainContainer ul li {
+    list-style: none;
+}
+
+.mainContainer ul li a:link, .mainContainer ul li a:visited {
+    text-decoration: none;
+
+}
+
+.mainContainer ul li a:hover {
+    text-decoration: none;
+}
