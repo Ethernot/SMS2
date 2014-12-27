@@ -20,15 +20,10 @@
     $model = $_POST['model'];
     $name = $_POST['name'];
     $conf = $_POST['conf'];
-    $conf2 = $_POST['conf2'];
+    //    $conf2 = $_POST['conf2'];
     $aux = $_POST['aux'];
     error_reporting(1);
-    echo "|".$conf."|<br>";
-    echo "|".$conf2."|";
-//    $confsToCompare=array();
-//    if (count($conf) > 0) {
-//        array_push($confsToCompare, $conf);
-//    }
+    echo "|" . $conf . "|<br>";
 
     //<!--todo:  carregar dados dos ficheiros-->
     $switchesBrandList = array("aaaaaaaa", "bbbbbbbbbb", "cccccccccccc");
@@ -51,7 +46,7 @@
             }
             echo '</select>';
         } else {
-            echo "<input type='hidden' name='brand' value=".$brand.">";
+            echo "<input type='hidden' name='brand' value=" . $brand . ">";
             echo "<label>" . $brand . "</label>";
         }
         echo "<br>";
@@ -68,7 +63,7 @@
             }
             echo '</select>';
         } else {
-            echo "<input type='hidden' name='model' value=".$model.">";
+            echo "<input type='hidden' name='model' value=" . $model . ">";
             echo "<label>" . $model . "</label>";
         }
         echo "<br>";
@@ -86,7 +81,7 @@
             }
             echo '</select>';
         } else {
-            echo "<input type='hidden' name='name' value=".$name.">";
+            echo "<input type='hidden' name='name' value=" . $name . ">";
             echo "<label>" . $name . "</label>";
         }
         echo "<br>";
@@ -96,23 +91,25 @@
             echo '<select name="conf" id="sel4" disabled="true" oninput="activeButtons()">';
             echo '<option disabled="disabled" selected="selected">Please select configuration</option>';
             foreach ($switchesConfsList as $a) {
-                if ($a != $conf) {
-                    if (strlen($a) > 0) {
-                        echo '<option value=' . $a . '>' . $a . '</option>';
-                    }
+                if (strlen($a) > 0) {
+                    echo '<option value=' . $a . '>' . $a . '</option>';
                 }
             }
             echo '</select>';
+            echo "<br>";
+
+            echo '<input type="submit" value="Add to comparison">';
+           // echo " <a href='#'> <button id='atc' disabled='true'>Add to comparison</button> </a>";
+            echo '</form>';
         } else {
-            echo "<input type='hidden' name='conf' value=".$conf.">";
-//            $i = 1;
-//            foreach ($confsToCompare as $a) {
-//                echo "<label> Configuration ".$i.": </label>";
-//                echo "<label>" . $a . "</label><br>";
-//                $i=$i+1;
-//            }
+            echo '</form>';
+            echo "<label> Configuration 1: </label>";
+            echo $conf;
+            echo "<br>";
+            echo "<form action='ShowCompare.php' method='post' name='goToCompare'>";
+            echo '<input type="hidden" name="conf" value=' . $conf . '>';
             echo "<label> Other Configuration: </label>";
-            echo '<select name="conf2" id="sel4" oninput="activeButtons()">';
+            echo '<select name="conf2">';
             echo '<option disabled="disabled" selected="selected">Please select configuration </option>';
             foreach ($switchesConfsList as $a) {
                 if ($a != $conf) {
@@ -123,13 +120,9 @@
             }
             echo '</select>';
             echo "<br>";
-//            echo "<input type='hidden' name='aux' value=".$aux." / ".$conf.">";
+            echo '<input type="submit" value="Compare">';
+            echo "</form>";
         }
-        echo "<br>";
-
-        echo " <a href='#'> <button id='atc' disabled='true'>Add to comparison</button> </a>";
-        echo " <a href='#'> <button id='cc' disabled='true'>compare configuration</button> </a>";
-        echo '</form>';
     } else {
         echo "No switches inserted <br><br>";
     }

@@ -11,6 +11,13 @@
     <p>Switch Management Software</p>
 </header>
 
+<?php
+$conf = $_POST['conf'];
+$conf2 = $_POST['conf2'];
+echo "a:".$conf;
+echo "b:".$conf2;
+?>
+
 
 <br>
 <button onclick="goBack()">Go Back</button>
