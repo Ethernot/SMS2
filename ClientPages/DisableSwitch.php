@@ -11,15 +11,8 @@
     <p>Switch Management Software</p>
 </header>
 
+<a href="../index.php"><button>Go home</button></a>
 
-<br>
-<button onclick="goBack()">Go Back</button>
-
-<script>
-    function goBack() {
-        window.history.back()
-    }
-</script>
 <footer class="mainFooter">
     <p>Copyright &copy; <span>Ethernot Team</span></p>
 </footer>

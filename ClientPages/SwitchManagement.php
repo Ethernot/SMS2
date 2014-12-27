@@ -2,7 +2,7 @@
 <html>
     <head lang="en">
         <meta charset="UTF-8">
-        <title>My test</title>
+        <title>Switch Management Software</title>
         <link rel="stylesheet" type="text/css" href="Css/stylesheet.css"/>
     </head>
     <body>
@@ -15,6 +15,14 @@
 
         </div>
 
+        <br>
+        <button onclick="goBack()">Go Back</button>
+
+        <script>
+            function goBack() {
+                window.history.back()
+            }
+        </script>
         <footer class="mainFooter">
             <p>Copyright &copy; <span>Ethernot Team</span></p>
         </footer>
