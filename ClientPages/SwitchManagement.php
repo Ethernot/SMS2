@@ -11,7 +11,7 @@
     <span>**Switch Management Software**</span>
 </header>
 <div class="mainContainer">
-    <h1>Switches managment: </h1>
+    <h1>Switches management: </h1>
     <?php
 
     $switchesBrandList = array("aaaaaaaa", "bbbbbbbbbb", "cccccccccccc");
