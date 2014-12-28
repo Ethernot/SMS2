@@ -14,9 +14,6 @@ body {
 }
 
 .mainHeader {
-    position: absolute;
-    left: 0.3%;
-    top: 1%;
     width: 99%;
     float: left;
     background-color: #DAFFCD;
@@ -24,7 +21,6 @@ body {
     border-radius: 5px;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
-    margin-bottom: 2%;
 }
 
 .mainHeader span:first-child {
@@ -52,9 +48,6 @@ body {
     -webkit-border-radius: 5px;
     border: #005000 solid;
     background-color: #DAFFCD;
-    position: fixed;
-    left: 0.3%;
-    bottom: 1%;
 }
 
 .mainFooter p {
@@ -69,8 +62,6 @@ body {
 }
 
 .mainContainer {
-    position: absolute;
-    top: 45%;
     float:left;
     width: 40%;
     background-color: #DAFFCD;
@@ -82,7 +73,7 @@ body {
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
     border: #005000 solid;
-    margin-left: 30%;
+    margin: 2.5% 30%;
 }
 
 
