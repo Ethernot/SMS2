@@ -10,10 +10,11 @@
     <span>S M S</span>
     <span>**Switch Management Software**</span>
 </header>
-
+<div class="mainContainer">
 
 <br>
 <button onclick="goBack()">Go Back</button>
+</div>
 
 <script>
     function goBack() {

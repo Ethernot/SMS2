@@ -11,7 +11,7 @@
     <span>**Switch Management Software**</span>
 </header>
 <div class="mainContainer">
-    <h1>Switches managment: </h1>
+    <h1>Switches management: </h1>
     <?php
 
     $switchesBrandList = array("aaaaaaaa", "bbbbbbbbbb", "cccccccccccc");
@@ -61,9 +61,9 @@
     <a href="AddSwitch.php"><button>Add new switch</button></a>
     <a href="CheckAllSwitches.php"><button>Check all switches</button></a>
 
-</div>
 <br>
 <button onclick="goBack()">Go Back</button>
+</div>
 <script>
     function activeModelSelect() {
         document.getElementById("sel2").disabled = false;

@@ -1,0 +1,6 @@
+//        todo: fazer classe e funcao para inserir novo switch
+//        var ok=<?php //className.addNewSwitch(brand,model,name,ip,access,username,passord); ?>
+
+//    $actualInfo = ClassName.getSwitchInfo(brand,model,name);
+
+//    getSwitchHistory(switchName);
