@@ -6,9 +6,8 @@
     <link rel="stylesheet" type="text/css" href="Css/stylesheet.css"/>
 </head>
 <body>
-<header class="mainHeader">
-    <h1>S M S</h1>
-    <p>Switch Management Software</p>
+<span>S M S</span>
+<span>**Switch Management Software**</span>
 </header>
 
 

@@ -7,9 +7,8 @@
 </head>
 <body>
 <header class="mainHeader">
-    <h1>S M S</h1>
-
-    <p>Switch Management Software</p>
+    <span>S M S</span>
+    <span>**Switch Management Software**</span>
 </header>
 
 <div class="mainContainer">
@@ -23,7 +22,7 @@
     //    $conf2 = $_POST['conf2'];
     $aux = $_POST['aux'];
     error_reporting(1);
-    echo "|" . $conf . "|<br>";
+//    echo "|" . $conf . "|<br>";
 
     //<!--todo:  carregar dados dos ficheiros-->
     $switchesBrandList = array("aaaaaaaa", "bbbbbbbbbb", "cccccccccccc");
@@ -36,7 +35,7 @@
         // brand select
         echo "<label> Brand: </label>";
         if (count($brand) == 0) {
-            echo '<select name="brand" id="sel1" oninput="activeModelSelect()">';
+            echo '<select name="brand" id="sel1" oninput="activeModelSelect()" required="true">';
             //<!--todo:  alterar o tipo de letra dos selects-->
             echo '<option disabled="disabled" selected="selected">Please select a brand</option>';
             foreach ($switchesBrandList as $a) {
@@ -54,7 +53,7 @@
         // model select
         echo "<label> Model: </label>";
         if (count($model) == 0) {
-            echo '<select name="model" id="sel2" disabled="true" oninput="activeNameSelect()">';
+            echo '<select name="model" required="true" id="sel2" disabled="true" oninput="activeNameSelect()">';
             echo '<option disabled="disabled" selected="selected">Please select a model</option>';
             foreach ($switchesModelList as $a) {
                 if (strlen($a) > 0) {
@@ -72,7 +71,7 @@
         // name select
         echo "<label> Name: </label>";
         if (count($name) == 0) {
-            echo '<select name="name" id="sel3" disabled="true" oninput="activeConfSelect()">';
+            echo '<select name="name" required="required" id="sel3" disabled="true" oninput="activeConfSelect()">';
             echo '<option disabled="disabled" selected="selected">Please select a name</option>';
             foreach ($switchesNameList as $a) {
                 if (strlen($a) > 0) {
@@ -88,7 +87,7 @@
 
         if ($conf == "") {
             echo "<label> Configuration: </label>";
-            echo '<select name="conf" id="sel4" disabled="true" oninput="activeButtons()">';
+            echo '<select name="conf" required="true" id="sel4" disabled="true" oninput="activeButtons()">';
             echo '<option disabled="disabled" selected="selected">Please select configuration</option>';
             foreach ($switchesConfsList as $a) {
                 if (strlen($a) > 0) {
@@ -98,7 +97,7 @@
             echo '</select>';
             echo "<br>";
 
-            echo '<input type="submit" value="Add to comparison">';
+            echo '<input type="submit" value="Add to comparison" disabled="true" id="atc" >';
            // echo " <a href='#'> <button id='atc' disabled='true'>Add to comparison</button> </a>";
             echo '</form>';
         } else {
@@ -108,6 +107,7 @@
             echo "<br>";
             echo "<form action='ShowCompare.php' method='post' name='goToCompare'>";
             echo '<input type="hidden" name="conf" value=' . $conf . '>';
+            echo "<input type='hidden' name='name' value=" . $name . ">";
             echo "<label> Other Configuration: </label>";
             echo '<select name="conf2">';
             echo '<option disabled="disabled" selected="selected">Please select configuration </option>';
@@ -128,7 +128,6 @@
     }
 
     ?>
-</div>
 <br>
 <button onclick="goBack()">Go Back</button>
 
@@ -149,6 +148,7 @@
         window.history.back()
     }
 </script>
+</div>
 <footer class="mainFooter">
     <p>Copyright &copy; <span>Ethernot Team</span></p>
 </footer>
