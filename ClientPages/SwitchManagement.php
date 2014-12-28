@@ -61,9 +61,9 @@
     <a href="AddSwitch.php"><button>Add new switch</button></a>
     <a href="CheckAllSwitches.php"><button>Check all switches</button></a>
 
-</div>
 <br>
 <button onclick="goBack()">Go Back</button>
+</div>
 <script>
     function activeModelSelect() {
         document.getElementById("sel2").disabled = false;

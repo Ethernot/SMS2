@@ -20,7 +20,7 @@
     $switchesModelList = array("ddddddd", "eeeeeeeee", "ffffffffffff");
 
     if (count($switchesBrandList) > 0) {
-        echo '<form name="compare" action="CheckSwitchInfo.php" method="post">';
+        echo '<form id="add" action="#" method="post">';
         echo "<label> Brand: </label>";
         echo '<select name="brand" id="sel1" oninput="activeModelSelect()">';
         //<!--todo:  alterar o tipo de letra dos selects-->
@@ -33,7 +33,7 @@
         echo '</select>';
         echo "<br>";
         echo "<label> Model: </label>";
-        echo '<select name="model" id="sel2" disabled="true" oninput="activeNameSelect()">';
+        echo '<select name="model" id="sel2" disabled="true">';
         echo '<option disabled="disabled" selected="selected">Please select a model</option>';
         foreach ($switchesModelList as $a) {
             if (strlen($a) > 0) {
@@ -41,25 +41,57 @@
             }
         }
         echo '</select>';
-        echo '<br><label>Name: </label><input type="text" required="true">';
-        echo '<br><label>IP: </label><input type="text" required="true">';
+        echo '<br><label>Name: </label><input type="text" id="name" required="true">';
+        echo '<br><label>IP: </label><input type="text" id="ip" required="true">';
         echo '<br><label>Accessed by: </label> <br>';
         echo '<input type="radio" name="access" value="ssh" checked="true"> SSH <br>';
-        echo '<input type="radio" name="acess" value="telnet"> Telnet <br>';
-        echo '<label>Username: </label><input type="text" required="true">';
-        echo '<br><label>Password: </label><input type="password" required="true" oninput="activeButtons()">';
+        echo '<input type="radio" name="access" value="telnet"> Telnet <br>';
+        echo '<label>Username: </label><input type="text" id="username" required="true">';
+        echo '<br><label>Password: </label><input type="password" id="password" required="true" oninput="activeButtons()">';
         echo "<br>";
-        echo "<input type='submit' value='Add switch' id='as' disabled='true'>";
+        echo "<input type='submit' value='Add switch' id='as' disabled='true' onclick='addSwitch()'>";
         echo "</form>";
     } else {
         echo "No switches inserted <br><br>";
     }
     ?>
-</div>
-<br>
 <button onclick="goBack()"> Go Back</button>
+</div>
 
 <script>
+    function addSwitch(){
+        var brand=document.getElementById("sel1").value;
+        var model=document.getElementById("sel2").value;
+        var name=document.getElementById("name").value;
+        var ip=document.getElementById("ip").value;
+        var access=getRadioVal(document.getElementById("add"),"access");
+        var username=document.getElementById("username").value;
+        var password=document.getElementById("password").value;
+//        todo: fazer classe e funcao para inserir novo switch
+//        var ok=<?php //className.addNewSwitch(brand,model,name,ip,access,username,passord); ?>
+        var ok=true;
+        if(ok){
+            alert("New switch added with success!");
+            window.location.assign("index.php");
+        }else{
+            alert("Error inserting new switch...")
+        }
+
+    }
+    function getRadioVal(form, name) {
+        var val;
+        var radios = form.elements[name];
+        for (var i=0, len=radios.length; i<len; i++) {
+            if ( radios[i].checked ) {
+                val = radios[i].value;
+                break;
+            }
+        }
+        return val;
+    }
+    function activeModelSelect() {
+        document.getElementById("sel2").disabled = false;
+    }
     function activeButtons() {
         document.getElementById("as").disabled = false;
     }
