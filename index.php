@@ -13,10 +13,19 @@
 
         <div class="mainContainer">
             <ul>
-                <li><a href="ClientPages/Comparison.php" >Compare configurations</a></li>
+                <li><a href="ClientPages/Comparison.php">Compare configurations</a></li>
                 <li><a href="ClientPages/SwitchManagement.php">Manage Switchs</a></li>
                 <li><a href="ClientPages/Settings.php">Settings</a></li>
                 <li><a href="ClientPages/ViewChanges.php">Show changes</a></li>
+                <?php
+                require_once("Server/Database.php");
+                echo "Models of 3Com:<br>";
+                $db = new Database();
+                $a = explode("\n",$db->getBrands());
+                foreach($a as $s){
+                    echo $s . "<br>";
+                }
+                ?>
             </ul>
         </div>
 
