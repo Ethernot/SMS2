@@ -58,7 +58,7 @@
 <button onclick="goBack()"> Go Back</button>
 </div>
 
-<script>
+<script language="javascript">
     function addSwitch(){
         var brand=document.getElementById("sel1").value;
         var model=document.getElementById("sel2").value;
@@ -70,14 +70,14 @@
 //        todo: fazer classe e funcao para inserir novo switch
 //        var ok=<?php //className.addNewSwitch(brand,model,name,ip,access,username,passord); ?>
         var ok=true;
-        if(ok){
+        if(true){
             alert("New switch added with success!");
-            window.location.assign("index.php");
+            document.getElementById("add").action="../index.php";
         }else{
             alert("Error inserting new switch...")
         }
-
     }
+
     function getRadioVal(form, name) {
         var val;
         var radios = form.elements[name];
