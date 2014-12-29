@@ -19,11 +19,11 @@
                 <li><a href="ClientPages/ViewChanges.php">Show changes</a></li>
                 <?php
                 require_once("Server/Database.php");
-                echo "Models of 3Com:<br>";
+                echo "history:<br>";
                 $db = new Database();
-                $a = explode("\n",$db->getBrands());
+                $a = $db->getSwitchHistory("sw-4210g.dei.uc.pt",0);
                 foreach($a as $s){
-                    echo $s . "<br>";
+                    echo $s."<br>";
                 }
                 ?>
             </ul>
