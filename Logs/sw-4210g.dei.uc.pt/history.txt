@@ -1,0 +1,1 @@
+sw-4210g.uc.pt,3Com,4210G,10.17.0.6,monitor,monitor,SSH/4210g.dei.uc.pt,3Com,4210G,10.17.0.6,monitor,monitor,SSH/sw-4210g.dei.uc,3Com,4210G,10.17.0.6,monitor,monitor,SSH/

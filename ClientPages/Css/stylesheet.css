@@ -8,8 +8,14 @@
     src: url(DJB%20Tweenybopper.ttf);
 }
 
+@font-face {
+    font-family: selectFont;
+    src: url(DJB%20Constance%20Beauregard.ttf);
+}
+
 body {
     background-color: #00CC66;
+    /*background-image: url("10876573_10152965849142288_705157134_o.jpg");*/
     color: #00CC00;
 }
 
@@ -38,6 +44,7 @@ body {
     font-family: Arial;
     font-size: 1em;
     text-align: center;
+    color: black;
 }
 
 .mainFooter {
@@ -76,8 +83,6 @@ body {
     margin: 2.5% 30%;
 }
 
-
-
 .mainContainer ul li {
     list-style: none;
     padding: 1% 0;
@@ -92,4 +97,9 @@ body {
     text-decoration: none;
     background-color: #33D633;
     color: white;
+}
+
+select {
+    font-family: selectFont;
+
 }
