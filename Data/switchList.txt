@@ -1,0 +1,9 @@
+DELL-PowerConnect 5548P,
+3Com-SuperStack 3,
+3Com-Switch 4200,
+3Com-Switch 4210,
+3Com-Switch 4200G,
+3Com-Switch 4500G,
+3Com-Switch 4800G,
+3Com-Switch 5500G-EI,
+SMC-8124PL2
