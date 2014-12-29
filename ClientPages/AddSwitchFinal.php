@@ -27,16 +27,10 @@
     echo "<h1>New Switch added with success!</h1>";
     ?>
 
-    <br>
-    <button onclick="goBack()">Go Back</button>
+
     <br>
     <a href="../index.php"><button>Go Home</button></a>
 </div>
-<script>
-    function goBack() {
-        window.history.back()
-    }
-</script>
 <footer class="mainFooter">
     <p>Copyright &copy; <span>Ethernot Team</span></p>
 </footer>
