@@ -21,10 +21,8 @@
                 require_once("Server/Database.php");
                 echo "history:<br>";
                 $db = new Database();
-                $a = $db->getSwitchHistory("sw-4210g.dei.uc.pt",0);
-                foreach($a as $s){
-                    echo $s."<br>";
-                }
+                $a = $db->getBrands();
+                echo $a;
                 ?>
             </ul>
         </div>

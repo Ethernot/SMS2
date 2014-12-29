@@ -36,24 +36,28 @@ class Database
             error_reporting(1);
         }
 
-        $file = fopen("Data/enabledSwitchList.txt", "r") or die("Unable to open file!");
-        $switchList = "";
-        while (!feof($file)) {
-            $switchList .= fgets($file);
-        }
-        fclose($file);
-        foreach (explode("/", $switchList) as $s) {
-            array_push($this->enabledSwitchs, $s);
+        if (!file_exists('Data/enabledSwitchList.txt')) {
+            $file = fopen("Data/enabledSwitchList.txt", "r") or die("Unable to open file!");
+            $switchList = "";
+            while (!feof($file)) {
+                $switchList .= fgets($file);
+            }
+            fclose($file);
+            foreach (explode("/", $switchList) as $s) {
+                array_push($this->enabledSwitchs, $s);
+            }
         }
 
-        $file = fopen("Data/disabledSwitchList.txt", "r") or die("Unable to open file!");
-        $switchList = "";
-        while (!feof($file)) {
-            $switchList .= fgets($file);
-        }
-        fclose($file);
-        foreach (explode("/", $switchList) as $s) {
-            array_push($this->disabledSwitchs, $s);
+        if (!file_exists('Data/disabledSwitchList.txt')) {
+            $file = fopen("Data/disabledSwitchList.txt", "r") or die("Unable to open file!");
+            $switchList = "";
+            while (!feof($file)) {
+                $switchList .= fgets($file);
+            }
+            fclose($file);
+            foreach (explode("/", $switchList) as $s) {
+                array_push($this->disabledSwitchs, $s);
+            }
         }
 
     }
@@ -132,7 +136,6 @@ class Database
         $this->saveToLogs("->> " . $date . " enabled Switch " . $name);
     }
 
-
     public function getSwitchInfo($name)
     {
         foreach ($this->enabledSwitchs as $s) {
@@ -169,10 +172,10 @@ class Database
         $this->enabledSwitchs = array_values($this->enabledSwitchs);
         array_push($this->enabledSwitchs, $newInfo);
 
-        $this->saveToHistory($oldName,$oldInfo);
+        $this->saveToHistory($oldName, $oldInfo);
 
-        if($oldName != $name){
-            $this->renameFolders($oldName,$name);
+        if ($oldName != $name) {
+            $this->renameFolders($oldName, $name);
         }
 
         $date = date("Y-m-d") . ' ' . date("h:i:sa");
@@ -180,7 +183,6 @@ class Database
 
         $this->saveInfo();
     }
-
 
     public function renameFolders($oldName, $newName)
     {
