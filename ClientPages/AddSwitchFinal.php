@@ -13,23 +13,24 @@
 <div class="mainContainer">
 
     <?php
+    require_once("../Server/Database.php");
     $newName = $_POST['name'];
     $newBrand = $_POST['brand'];
     $newModel=$_POST['model'];
     $newIp=$_POST['ip'];
     $newAccess=$_POST['access'];
-    $newUser=$_POST['user'];
+    $newUser=$_POST['username'];
     $newPassword=$_POST['password'];
-//    Database db = new dataBase();
-//    $ok=db.addNewSwitch(n);
-    if(ok){
-//        echo
-    }
+    $db = new Database();
+//    addNewSwitch($brand, $model, $name, $ip, $access, $username, $password)
+    $db->addNewSwitch($newBrand,$newModel,$newName,$newIp,$newAccess,$newUser,$newPassword);
+    echo "<h1>New Switch added with success!</h1>";
     ?>
 
     <br>
     <button onclick="goBack()">Go Back</button>
-<!--    <button onclick="goBack()">Go Home</button>-->
+    <br>
+    <a href="../index.php"><button>Go Home</button></a>
 </div>
 <script>
     function goBack() {

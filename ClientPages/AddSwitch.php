@@ -47,7 +47,7 @@
         echo '<input type="radio" name="access" value="ssh" checked="true"> SSH <br>';
         echo '<input type="radio" name="access" value="telnet"> Telnet <br>';
         echo '<label>Username: </label><input type="text" name="username" required="true">';
-        echo '<br><label>Password: </label><input type="password" named="password" required="true" oninput="activeButtons()">';
+        echo '<br><label>Password: </label><input type="password" name="password" required="true" oninput="activeButtons()">';
         echo "<br>";
         echo "<input type='submit' value='Add switch' id='as' disabled='true'>";
         echo "</form>";
