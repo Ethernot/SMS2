@@ -59,36 +59,6 @@
 </div>
 
 <script language="javascript">
-//    function addSwitch(){
-//        var brand=document.getElementById("sel1").value;
-//        var model=document.getElementById("sel2").value;
-//        var name=document.getElementById("name").value;
-//        var ip=document.getElementById("ip").value;
-//        var access=getRadioVal(document.getElementById("add"),"access");
-//        var username=document.getElementById("username").value;
-//        var password=document.getElementById("password").value;
-////        todo: fazer classe e funcao para inserir novo switch
-////        var ok=<?php ////className.addNewSwitch(brand,model,name,ip,access,username,passord); ?>
-//        var ok=true;
-//        if(true){
-//            alert("New switch added with success!");
-//            document.getElementById("add").action="../index.php";
-//        }else{
-//            alert("Error inserting new switch...")
-//        }
-//    }
-//
-//    function getRadioVal(form, name) {
-//        var val;
-//        var radios = form.elements[name];
-//        for (var i=0, len=radios.length; i<len; i++) {
-//            if ( radios[i].checked ) {
-//                val = radios[i].value;
-//                break;
-//            }
-//        }
-//        return val;
-//    }
     function activeModelSelect() {
         document.getElementById("sel2").disabled = false;
     }
