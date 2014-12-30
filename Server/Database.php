@@ -100,7 +100,9 @@ class Database
 
     public function addNewSwitch($brand, $model, $name, $ip, $access, $username, $password)
     {
-        $newSwitch = $name . ',' . $brand . ',' . $model . ',' . $ip . ',' . $username . ',' . $password . ',' . $access . "/";
+        $brandString = array_keys($this->availableModels)[$brand];
+        $modelString = explode(",",$this->getModelByBrands($brandString))[$model];
+        $newSwitch = $name . ',' . $brandString . ',' . $modelString . ',' . $ip . ',' . $username . ',' . $password . ',' . $access . "/";
         array_push($this->enabledSwitchs, $newSwitch);
         $this->saveInfo();
         $date = date("Y-m-d") . ' ' . date("h:i:sa");
