@@ -288,4 +288,17 @@ class Database
         return $finalList;
     }
 
+    public function getLogs()
+    {
+        $logs = "";
+        if (file_exists("../Logs/changeHistory.txt")) {
+            $file = fopen("../Logs/changeHistory.txt", "r") or die("Unable to open file!");
+            while (!feof($file)) {
+                $logs .= fgets($file);
+            }
+            fclose($file);
+        }
+        return $logs;
+    }
+
 }

@@ -104,3 +104,18 @@ select {
 
 }
 
+.logs {
+    float:left;
+    width: 70%;
+    text-align: center  ;
+    background-color: #DAFFCD;
+    font-family: mainFont;
+    font-size: 25px;
+    font-weight: bold;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border: #005000 solid;
+    margin: 2.5% 15%;
+}
+
