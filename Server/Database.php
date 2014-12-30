@@ -160,6 +160,12 @@ class Database
         }
     }
 
+    public function getSwitchInfoByInt($brand,$model,$name)
+    {
+         $aux=explode(",",$this->getEnabledNamesByModelsAndBrand($brand,$model))[$name-1];
+        return $this->getSwitchInfo($aux);
+    }
+
     public function getSwitchHistory($name, $i)
     {
         $file = fopen("../Logs/" . $name . "/history.txt", "r") or die("Unable to open file!");
@@ -259,8 +265,8 @@ class Database
     public function getEnabledModelsByBrand($brand)
     {
         $finalList = "";
-        $brandString = array_keys($this->availableModels)[$brand - 1];
-        $modelList = $this->getModelByBrands($brandString);
+        $modelList = $this->getModelByBrands($brand);
+        $modelList = explode(",",$modelList);
         foreach ($modelList as $model) {
             foreach ($this->enabledSwitchs as $switch) {
                 if (explode(",", $switch)[2] == str_replace(array("\n", "\r"), '', $model)) {
@@ -271,13 +277,11 @@ class Database
         return $finalList;
     }
 
-    public function getNamesByModelsAndBrand($brand, $model)
+    public function getEnabledNamesByModelsAndBrand($brand, $model)
     {
         $finalList = "";
-        $brandString = array_keys($this->availableModels)[$brand - 1];
-        $modelString = str_replace(array("\n", "\r"), '', explode(",", $this->getModelByBrands($brandString))[$model - 1]);
         foreach ($this->enabledSwitchs as $switch) {
-            if (explode(",", $switch)[2] == str_replace(array("\n", "\r"), '', $modelString)) {
+            if (explode(",", $switch)[2] == str_replace(array("\n", "\r"), '', $model)) {
                 $finalList .= explode(",", $switch)[0] . ",";
             }
         }
