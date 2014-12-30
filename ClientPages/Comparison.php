@@ -12,21 +12,13 @@
 </header>
 
 <div class="mainContainer">
-    <h1>Compare switches: </h1>
+    <h1>Compare Configurations: </h1>
     <?php
     error_reporting(0);
-    $brand = $_POST['brand'];
-    $model = $_POST['model'];
-    $name = $_POST['name'];
-    $conf = $_POST['conf'];
-    $aux = $_POST['aux'];
+    $brandSelected = $_POST['brand'];
+    $modelSelected = $_POST['model'];
+    $nameSelected = $_POST['name'];
     error_reporting(1);
-
-    echo " brand: " . $brand;
-    echo " model: " . $model;
-    echo " name: " . $model;
-    echo " conf: " . $conf;
-    echo " aux: " . $aux;
 
     require_once("../Server/Database.php");
     $db = new Database();
@@ -36,7 +28,7 @@
         echo "<label> Brand: </label>";
         echo '<select name="brand" id="sel1" oninput="activeModelSelect()">';
         echo '<option disabled="disabled" selected="selected">Please select a brand</option>';
-        $i=1;
+        $i = 1;
         foreach ($switchesBrandList as $a) {
             if (strlen($a) > 0) {
                 if ($brandSelected == $i) {
@@ -50,11 +42,11 @@
         echo '</select>';
         echo "</form>";
 
-        echo '<form id="f2" action=Comparison.php" method="post">';
+        echo '<form id="f2" action="Comparison.php" method="post">';
         echo '<input type="hidden" name="brand" value="' . $brandSelected . '">';
         echo "<label> Model: </label>";
         if ($brandSelected > 0) {
-            $switchesModelList = explode(",", $db->getEnabledModelsByBrand($switchesBrandList[$brandSelected-1]));
+            $switchesModelList = explode(",", $db->getEnabledModelsByBrand($switchesBrandList[$brandSelected - 1]));
 //            print_r($switchesModelList);
 //            echo "...: ".$db->getEnabledModelsByBrand($switchesBrandList[$brandSelected-1]);
             echo '<select name="model" id="sel2" oninput="activeNameSelect()">';
@@ -78,66 +70,42 @@
         echo "</form>";
 
         echo '<form name="f3" action="Comparison.php" method="post">';
-        echo '<input type="hidden" name="brand" value="' . $switchesBrandList[$brandSelected-1] . '">';
-        echo '<input type="hidden" name="model" value="' . $switchesModelList[$modelSelected-1] . '">';
+        echo '<input type="hidden" name="brand" value="' . $brandSelected . '">';
+        echo '<input type="hidden" name="model" value="' . $modelSelected . '">';
         echo "<label> Name: </label>";
         if ($modelSelected > 0) {
-            $switchesNameList = explode(",", $db->getEnabledNamesByModelsAndBrand($switchesBrandList[$brandSelected-1],$switchesModelList[$modelSelected-1]));
-            echo '<select name="name" id="sel3" oninput="activeButtons()">';
+            $switchesNameList = explode(",", $db->getEnabledNamesByModelsAndBrand($switchesBrandList[$brandSelected - 1], $switchesModelList[$modelSelected - 1]));
+            echo '<select name="name" id="sel3" oninput="activeConfSelect()">';
         } else {
-            echo '<select name="name" id="sel3" disabled="true" oninput="activeButtons()">';
+            echo '<select name="name" id="sel3" disabled="true" oninput="activeConfSelect()">';
         }
         echo '<option disabled="disabled" selected="selected">Please select a name</option>';
-        $i=1;
+        $i = 1;
         foreach ($switchesNameList as $a) {
             if (strlen($a) > 1) {
                 echo '<option value=' . $i++ . '>' . $a . '</option>';
             }
         }
         echo '</select>';
-        echo "<br>";
-        echo "<input type='submit' value='Check Switch' id='cs' disabled='true'>";
         echo "</form>";
 
-
         echo "<form id='f4' method='post' action='ShowCompare.php'>";
-        if ($conf == "") {
-            echo "<label> Configuration: </label>";
-            echo '<select name="conf" required="true" id="sel4" disabled="true" oninput="activeButtons()">';
-            echo '<option disabled="disabled" selected="selected">Please select configuration</option>';
-            foreach ($switchesConfsList as $a) {
-                if (strlen($a) > 0) {
-                    echo '<option value=' . $a . '>' . $a . '</option>';
-                }
+        echo '<input type="hidden" name="brand" value="' . $brandSelected . '">';
+        echo '<input type="hidden" name="model" value="' . $modelSelected . '">';
+        echo '<input type="hidden" name="name" value="' . $nameSelected . '">';
+        $switchesConfsList = explode(",", "asdsad,asda,das,dsa,sad,asd,sa,das");
+        echo "<label> Configuration 1: </label>";
+        echo '<select name="conf1" required="true" id="sel4" disabled="true" oninput="">';
+        echo '<option disabled="disabled" selected="selected">Please select configuration</option>';
+        foreach ($switchesConfsList as $a) {
+            if (strlen($a) > 0) {
+                echo '<option value=' . $a . '>' . $a . '</option>';
             }
-            echo '</select>';
-            echo "<br>";
-
-            echo '<input type="submit" value="Add to comparison" disabled="true" id="atc" >';
-            echo '</form>';
-        } else {
-            echo '</form>';
-            echo "<label> Configuration 1: </label>";
-            echo $conf;
-            echo "<br>";
-            echo "<form action='ShowCompare.php' method='post' name='goToCompare'>";
-            echo '<input type="hidden" name="conf" value=' . $conf . '>';
-            echo "<input type='hidden' name='name' value=" . $name . ">";
-            echo "<label> Other Configuration: </label>";
-            echo '<select name="conf2">';
-            echo '<option disabled="disabled" selected="selected">Please select configuration </option>';
-            foreach ($switchesConfsList as $a) {
-                if ($a != $conf) {
-                    if (strlen($a) > 0) {
-                        echo '<option value=' . $a . '>' . $a . '</option>';
-                    }
-                }
-            }
-            echo '</select>';
-            echo "<br>";
-            echo '<input type="submit" value="Compare">';
-            echo "</form>";
         }
+        echo '</select>';
+        echo "<br>";
+        echo '<input type="submit" value="Add to comparison" disabled="true" id="atc" >';
+        echo '</form>';
     } else {
         echo "No switches inserted <br><br>";
     }
