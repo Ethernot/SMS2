@@ -25,28 +25,19 @@ echo"
     <?php
     echo "<h1> Switch Details: </h1>";
     echo "<label> Brand: " . $actualInfoArray[1] . " </label>";
-    echo "<button onclick='modify(1)'>Modify</button>";
-    echo "<button onclick='getHistory(1)'>Check history</button><br>";
     echo "<label> Model: " . $actualInfoArray[2] . " </label>";
-    echo "<button onclick='modify(2)'>Modify</button>";
-    echo "<button onclick='getHistory(2)'>Check history</button><br>";
     echo "<label> Name: " . $actualInfoArray[0] . " </label>";
-    echo "<button onclick='modify(0)'>Modify</button>";
-    echo "<button onclick='getHistory(0)'>Check history</button><br>";
     echo "<label> IP: " . $actualInfoArray[3] . " </label>";
-    echo "<button onclick='modify(3)'>Modify</button>";
-    echo "<button onclick='getHistory(3)'>Check history</button><br>";
     echo "<label> Access by: " . $actualInfoArray[6] . " </label>";
-    echo "<button onclick='modify(6)'>Modify</button>";
-    echo "<button onclick='getHistory(6)'>Check history</button><br>";
     echo "<label> user: " . $actualInfoArray[4] . " </label>";
-    echo "<button onclick='modify(4)'>Modify</button>";
-    echo "<button onclick='getHistory(4)'>Check history</button><br>";
     echo "<label> Password: " . $actualInfoArray[5] . " </label>";
-    echo "<button onclick='modify(5)'>Modify</button><br>";
-    echo "<button onclick='saveChanges()'>Save changes</button><br>";
-    ?>
 
+    echo "<form action='ModifySwitch.php' method='post'>";
+    echo "<input type='hidden' value='".$name."'>";
+    echo "<input type='submit' value='Modify'>";
+    echo "</form>"
+
+    ?>
     <button onclick="goBack()">Go Back</button>
 </div>
 
