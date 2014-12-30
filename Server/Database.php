@@ -23,7 +23,7 @@ class Database
 
     function loadInfo()
     {
-        $file = fopen("../Data/switchList.txt", "r") or die("Unable to open file!");
+        $file = fopen("Data/switchList.txt", "r") or die("Unable to open file!");
         $switchList = "";
         while (!feof($file)) {
             $switchList .= fgets($file);
@@ -35,8 +35,9 @@ class Database
             $this->availableModels[$switch[0]] .= $switch[1];
             error_reporting(1);
         }
-        if (file_exists('../Data/enabledSwitchList.txt')) {
-            $file = fopen("../Data/enabledSwitchList.txt", "r") or die("Unable to open file!");
+
+        if (!file_exists('Data/enabledSwitchList.txt')) {
+            $file = fopen("Data/enabledSwitchList.txt", "r") or die("Unable to open file!");
             $switchList = "";
             while (!feof($file)) {
                 $switchList .= fgets($file);
@@ -46,8 +47,9 @@ class Database
                 array_push($this->enabledSwitchs, $s);
             }
         }
-        if (file_exists('../Data/disabledSwitchList.txt')) {
-            $file = fopen("../Data/disabledSwitchList.txt", "r") or die("Unable to open file!");
+
+        if (!file_exists('Data/disabledSwitchList.txt')) {
+            $file = fopen("Data/disabledSwitchList.txt", "r") or die("Unable to open file!");
             $switchList = "";
             while (!feof($file)) {
                 $switchList .= fgets($file);
@@ -62,16 +64,16 @@ class Database
 
     function saveInfo()
     {
-        if (!file_exists('../Data/enabledSwitchList.txt'))
-            mkdir('../Data', 0777, true);
+        if (!file_exists('Data/enabledSwitchList.txt'))
+            mkdir('Data', 0777, true);
 
-        $file = fopen("../Data/enabledSwitchList.txt", "w") or die("Unable to open file!");
+        $file = fopen("Data/enabledSwitchList.txt", "a") or die("Unable to open file!");
         foreach ($this->enabledSwitchs as $s) {
             fwrite($file, $s . '/');
         }
         fclose($file);
 
-        $file = fopen("../Data/disabledSwitchList.txt", "w") or die("Unable to open file!");
+        $file = fopen("Data/disabledSwitchList.txt", "a") or die("Unable to open file!");
         foreach ($this->disabledSwitchs as $s) {
             fwrite($file, $s . '/');
         }
@@ -98,7 +100,9 @@ class Database
 
     public function addNewSwitch($brand, $model, $name, $ip, $access, $username, $password)
     {
-        $newSwitch = $name . ',' . $brand . ',' . $model . ',' . $ip . ',' . $username . ',' . $password . ',' . $access;
+        $brandString = array_keys($this->availableModels)[$brand];
+        $modelString = explode(",",$this->getModelByBrands($brandString))[$model];
+        $newSwitch = $name . ',' . $brandString . ',' . $modelString . ',' . $ip . ',' . $username . ',' . $password . ',' . $access . "/";
         array_push($this->enabledSwitchs, $newSwitch);
         $this->saveInfo();
         $date = date("Y-m-d") . ' ' . date("h:i:sa");
@@ -145,7 +149,7 @@ class Database
 
     public function getSwitchHistory($name, $i)
     {
-        $file = fopen("../Logs/" . $name . "/history.txt", "r") or die("Unable to open file!");
+        $file = fopen("Logs/" . $name . "/history.txt", "r") or die("Unable to open file!");
         $switchList = "";
         while (!feof($file)) {
             $switchList .= fgets($file);
@@ -184,26 +188,26 @@ class Database
 
     public function renameFolders($oldName, $newName)
     {
-        rename("../Logs/" . $oldName, "Logs/" . $newName);
-        rename("../Configs/" . $oldName, "Configs/" . $newName);
+        rename("Logs/" . $oldName, "Logs/" . $newName);
+        rename("Configs/" . $oldName, "Configs/" . $newName);
     }
 
     public function saveToHistory($name, $oldInfo)
     {
-        if (!file_exists('../Logs/' . $name . '/history.txt'))
-            mkdir('../Logs/' . $name, 0777, true);
+        if (!file_exists('Logs/' . $name . '/history.txt'))
+            mkdir('Logs/' . $name, 0777, true);
 
-        $file = fopen("../Logs/" . $name . "/history.txt", "a") or die("Unable to open file!");
+        $file = fopen("Logs/" . $name . "/history.txt", "a") or die("Unable to open file!");
         fwrite($file, $oldInfo . '/');
         fclose($file);
     }
 
     public function saveToLogs($info)
     {
-        if (!file_exists('../Logs/changeHistory.txt'))
-            mkdir('../Logs', 0777, true);
+        if (!file_exists('Logs/changeHistory.txt'))
+            mkdir('Logs', 0777, true);
 
-        $file = fopen("../Logs/changeHistory.txt", "a") or die("Unable to open file!");
+        $file = fopen("Logs/changeHistory.txt", "a") or die("Unable to open file!");
         fwrite($file, $info . "\n");
         fclose($file);
 
