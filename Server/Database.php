@@ -314,8 +314,8 @@ class Database
 
     public function getConfigInfo($name, $config){
         $confInfo = "";
-        if (file_exists("../Config/".$name."/".$config.".txt")) {
-            $file = fopen("../Config/".$name."/".$config.".txt", "r") or die("Unable to open file!");
+        if (file_exists("../Configs/".$name."/".$config.".txt")) {
+            $file = fopen("../Configs/".$name."/".$config.".txt", "r") or die("Unable to open file!");
             while (!feof($file)) {
                 $confInfo .= fgets($file);
             }

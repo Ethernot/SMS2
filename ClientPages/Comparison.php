@@ -19,6 +19,7 @@
     $modelSelected = $_POST['model'];
     $nameSelected = $_POST['name'];
     $conf1Selected = $_POST['conf1'];
+    $conf2Selected = $_POST['conf2'];
     error_reporting(1);
 
     require_once("../Server/Database.php");
@@ -119,17 +120,50 @@
         echo "<br>";
         echo '</form>';
 
+        echo "<form id='f5' method='post' action='Comparison.php'>";
+        echo '<input type="hidden" name="brand" value="' . $brandSelected . '">';
+        echo '<input type="hidden" name="model" value="' . $modelSelected . '">';
+        echo '<input type="hidden" name="name" value="' . $nameSelected . '">';
+        echo '<input type="hidden" name="conf1" value="' . $conf1Selected . '">';
+        echo "<label> Configuration 2: </label>";
+        $switchesConfsList = explode(",", $db->getConfs($switchesNameList[$nameSelected - 1]));
+        unset($switchesConfsList[$conf1Selected - 1]);
+        if ($conf2Selected > 0) {
+            echo '<select name="conf2" id="sel5" oninput="activeCheckConf2()">';
+        } else {
+            echo '<select name="conf2" id="sel5" disabled="true" oninput="activeCheckConf2()">';
+        }
+        echo '<option disabled="disabled" selected="selected">Please select configuration</option>';
+        foreach ($switchesConfsList as $a) {
+            if (strlen($a) > 1) {
+                if ($conf2Selected == $i) {
+                    echo '<option selected="selected" value=' . $i . '>' . $a . '</option>';
+                } else {
+                    echo '<option value=' . $i . '>' . $a . '</option>';
+                }
+                $i++;
+            }
+        }
+        echo '</select>';
+        echo "<br>";
+        echo '</form>';
+
+        echo '<button onclick="activef5()"> Add other configuration </button>';
 
         echo "<form id='f6' action='ShowCompare.php' method='post'>";
         echo '<input type="hidden" name="brand" value="' . $brandSelected . '">';
         echo '<input type="hidden" name="model" value="' . $modelSelected . '">';
-        echo '<input type="hidden" name="name" value="' . $switchesNameList[$nameSelected-1] . '">';
-        echo '<input type="hidden" name="conf1" value="' . $switchesConfsList[$conf1Selected-1] . '">';
-        if($conf1Selected>0){
+        echo '<input type="hidden" name="name" value="' . $switchesNameList[$nameSelected - 1] . '">';
+        echo '<input type="hidden" name="conf1" value="' . $switchesConfsList[$conf1Selected - 1] . '">';
+        echo '<input type="hidden" name="conf2" value="' . $switchesConfsList[$conf2Selected - 1] . '">';
+        if ($conf1Selected > 0 && $conf2Selected < 1) {
             echo "<input type='submit' value='Check configuration'> ";
-        }else{
-        echo "<input type='submit' disabled='true' value='Check configuration'> ";
-
+        } else {
+            if ($conf2Selected > 0) {
+                echo "<input type='submit' value='Compare configurations'> ";
+            } else {
+                echo "<input type='submit' value='Check configuration'> ";
+            }
         }
         echo "</form>";
     } else {
@@ -153,12 +187,17 @@
             document.getElementById("sel4").disabled = false;
             document.getElementById("f3").submit();
         }
-        function activeCheckConf(){
-            alert("sadfd");
+        function activeCheckConf() {
             document.getElementById("f4").submit();
+        }
+        function activeCheckConf2() {
+            document.getElementById("f5").submit();
         }
         function activeButtons() {
             document.getElementById("atc").disabled = false;
+        }
+        function activef5() {
+            document.getElementById("sel5").disabled = false;
         }
         function goBack() {
             window.history.back()

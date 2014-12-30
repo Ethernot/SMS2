@@ -12,22 +12,28 @@
 </header>
 <div class="mainContainer">
     <?php
+//    var_dump(isset($_POST['conf2']));
     error_reporting(0);
     $name = $_POST['name'];
     $conf1 = $_POST['conf1'];
     $conf2 = $_POST['conf2'];
     error_reporting(1);
-    echo $name."<br>";
+//    echo $name."<br>";
     echo $conf1;
-//    $file = file_get_contents('configs/' . $name . '/' . $conf, true);
-//    echo $file;
-    ?>
-</div>
-
-<div class="mainContainer">
-    <?php
-    $file = file_get_contents('configs/' . $name . '/' . $conf2, true);
-    echo $file;
+    require_once("../Server/Database.php");
+    $db = new Database();
+    if(!isset($_POST['conf2'])  ){
+        $a=$db->getConfigInfo($name,$conf1);
+        echo $a;
+    }else{
+        $a=$db->getConfigInfo($name,$conf1);
+        echo $a;
+        echo "</div>";
+        echo "<div class='mainContainer'>";
+        $a=$db->getConfigInfo($name,$conf2);
+        echo $a;
+        echo "</div>";
+    }
     ?>
 </div>
 
