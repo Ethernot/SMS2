@@ -301,11 +301,11 @@ class Database
         return $logs;
     }
 
-    public function getConf($name){
+    public function getConfs($name){
         $confsList = "";
         $dir = opendir("../Configs/".$name);
         while(($file = readdir($dir)) != false){
-            $confsList .= $file . ",";
+            $confsList .= str_replace(".txt","",$file) . ",";
         }
         return $confsList;
     }
