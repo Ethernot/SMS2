@@ -271,7 +271,7 @@ class Database
         return $finalList;
     }
 
-    public function getNamesByModelsAndBrand($brand, $model)
+    public function getEnabledNamesByModelsAndBrand($brand, $model)
     {
         $finalList = "";
         $brandString = array_keys($this->availableModels)[$brand - 1];
@@ -282,6 +282,19 @@ class Database
             }
         }
         return $finalList;
+    }
+
+    public function getLogs()
+    {
+        $logs = "";
+        if (file_exists("../Logs/changeHistory.txt")) {
+            $file = fopen("../Logs/changeHistory.txt", "r") or die("Unable to open file!");
+            while (!feof($file)) {
+                $logs .= fgets($file);
+            }
+            fclose($file);
+        }
+        return $logs;
     }
 
 }
