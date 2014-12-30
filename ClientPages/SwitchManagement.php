@@ -19,10 +19,10 @@
     $brandSelected = $_POST['brand'];
     $modelSelected = $_POST['model'];
     error_reporting(1);
-    echo "sdfv: " . $modelSelected;
+//    echo "sdfv: " . $modelSelected;
     //    $switchesModelList=array();
-    $switchesBrandList = explode("\n", $db->getBrands()); //getEnabledBrands
-    if (count($switchesBrandList) > 0) {
+    $switchesBrandList = explode("\n", $db->getEnabledBrands());
+    if (count($switchesBrandList) > 1) {
         echo '<form id="f1" action="SwitchManagement.php" method="post">';
         echo "<label> Brand: </label>";
         echo '<select name="brand" id="sel1" oninput="activeModelSelect()">';
@@ -46,7 +46,9 @@
         echo '<input type="hidden" name="brand" value="' . $brandSelected . '">';
         echo "<label> Model: </label>";
         if ($brandSelected > 0) {
-            $switchesModelList = explode(",", $db->getModelByBrands($switchesBrandList[$brandSelected-1])); //getEnabledModelByBrands($brandselected)
+            $switchesModelList = explode(",", $db->getEnabledModelsByBrand($switchesBrandList[$brandSelected-1]));
+//            print_r($switchesModelList);
+//            echo "...: ".$db->getEnabledModelsByBrand($switchesBrandList[$brandSelected-1]);
             echo '<select name="model" id="sel2" oninput="activeNameSelect()">';
         } else {
             echo '<select name="model" id="sel2" disabled="true" oninput="activeNameSelect()">';
@@ -68,11 +70,11 @@
         echo "</form>";
 
         echo '<form name="f3" action="CheckSwitchInfo.php" method="post">';
-        echo '<input type="hidden" name="brand" value="' . $brandSelected . '">';
-        echo '<input type="hidden" name="model" value="' . $modelSelected . '">';
+        echo '<input type="hidden" name="brand" value="' . $switchesBrandList[$brandSelected-1] . '">';
+        echo '<input type="hidden" name="model" value="' . $switchesModelList[$modelSelected-1] . '">';
         echo "<label> Name: </label>";
         if ($modelSelected > 0) {
-            $switchesNameList = explode(",", $db->getModelByBrands($switchesBrandList[$brandSelected-1],$switchesNameList[$nameSelected-1])); //getEnabledModelByBrands($brandselected)
+            $switchesNameList = explode(",", $db->getEnabledNamesByModelsAndBrand($switchesBrandList[$brandSelected-1],$switchesModelList[$modelSelected-1]));
             echo '<select name="name" id="sel3" oninput="activeButtons()">';
         } else {
             echo '<select name="name" id="sel3" disabled="true" oninput="activeButtons()">';
@@ -89,7 +91,7 @@
         echo "<input type='submit' value='Check Switch' id='cs' disabled='true'>";
         echo "</form>";
     } else {
-        echo "No switches inserted <br><br>";
+        echo "<label>No switches inserted</label><br>";
     }
 
     function replaceSpaces($array)

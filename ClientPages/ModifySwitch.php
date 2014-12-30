@@ -11,16 +11,30 @@
     <span>**Switch Management Software**</span>
 </header>
 <div class="mainContainer">
+    <?php
+    $brand=$_POST['brand'];
+    $model=$_POST['model'];
+    $name = $_POST['name'];
+    require_once("../Server/Database.php");
+    $db = new Database();
+    $actualInfo = $db->getSwitchInfoByInt($brand,$model,$name);
+    //    echo "..."+$name;
+    $actualInfoArray = explode(",", $actualInfo);
+    ?>
+    <?php
+    echo "<form action='ModifySwitchFinal.php' method='post'>";
+    echo "<h1> Switch Details: </h1>";
+    echo "<label> Brand: " . $actualInfoArray[1] . " </label><br>";
+    echo "<label> Model: " . $actualInfoArray[2] . " </label><br>";
+    echo "<label> Name: " . $actualInfoArray[0] . " </label><br>";
+    echo "<label> IP: " . $actualInfoArray[3] . " </label><br>";
+    echo "<label> Access by: " . $actualInfoArray[6] . " </label><br>";
+    echo "<label> user: " . $actualInfoArray[4] . " </label><br>";
+    echo "</form>"
+    ?>
 
-<br>
-<button onclick="goBack()">Go Back</button>
+<a href="CheckSwitchInfo.php"><button>Get back</button></a>
 </div>
-
-<script>
-    function goBack() {
-        window.history.back()
-    }
-</script>
 <footer class="mainFooter">
     <p>Copyright &copy; <span>Ethernot Team</span></p>
 </footer>
