@@ -43,8 +43,10 @@ class Database
                 $switchList .= fgets($file);
             }
             fclose($file);
-            foreach (explode("/", $switchList) as $s) {
-                array_push($this->enabledSwitchs, $s);
+            foreach (explode("\n", $switchList) as $s) {
+                if (strlen($s) > 1) {
+                    array_push($this->enabledSwitchs, $s);
+                }
             }
         }
 
@@ -55,8 +57,10 @@ class Database
                 $switchList .= fgets($file);
             }
             fclose($file);
-            foreach (explode("/", $switchList) as $s) {
-                array_push($this->disabledSwitchs, $s);
+            foreach (explode("\n", $switchList) as $s) {
+                if (strlen($s) > 1) {
+                    array_push($this->disabledSwitchs, $s);
+                }
             }
         }
 
@@ -69,13 +73,17 @@ class Database
 
         $file = fopen("../Data/enabledSwitchList.txt", "w") or die("Unable to open file!");
         foreach ($this->enabledSwitchs as $s) {
-            fwrite($file, $this->getSwitchInfo(explode(",", $s)[0]) . "\n");
+            if (strlen($s) > 1) {
+                fwrite($file, $this->getSwitchInfo(explode(",", $s)[0]) . "\n");
+            }
         }
         fclose($file);
 
         $file = fopen("../Data/disabledSwitchList.txt", "w") or die("Unable to open file!");
         foreach ($this->disabledSwitchs as $s) {
-            fwrite($file, $this->getSwitchInfo(explode(",", $s)[0]) . "\n");
+            if (strlen($s) > 1) {
+                fwrite($file, $this->getSwitchInfo(explode(",", $s)[0]) . "\n");
+            }
         }
         fclose($file);
     }
@@ -100,9 +108,9 @@ class Database
 
     public function addNewSwitch($brand, $model, $name, $ip, $access, $username, $password)
     {
-        $brandString = array_keys($this->availableModels)[$brand-1];
-        $modelString = explode(",",$this->getModelByBrands($brandString))[$model-1];
-        $newSwitch = $name . ',' . $brandString . ',' . $modelString . ',' . $ip . ',' . $username . ',' . $password . ',' . $access . "/";
+        $brandString = array_keys($this->availableModels)[$brand - 1];
+        $modelString = str_replace(array("\n", "\r"), '', explode(",", $this->getModelByBrands($brandString))[$model - 1]);
+        $newSwitch = $name . ',' . $brandString . ',' . $modelString . ',' . $ip . ',' . $username . ',' . $password . ',' . $access;
         array_push($this->enabledSwitchs, $newSwitch);
         $this->saveInfo();
         $date = date("Y-m-d") . ' ' . date("h:i:sa");
@@ -218,5 +226,62 @@ class Database
 
     }
 
+    public function getAllSwitchsNames()
+    {
+        $switchsList = "";
+        foreach ($this->enabledSwitchs as $s) {
+            $switchsList .= explode(",", $s)[0] . ",";
+        }
+        foreach ($this->disabledSwitchs as $s) {
+            $switchsList .= explode(",", $s)[0] . ",";
+        }
+    }
+
+    public function isSwitchEnabled($name)
+    {
+        foreach ($this->enabledSwitchs as $s) {
+            if (explode(",", $s)[0] == $name) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public function getEnabledBrands()
+    {
+        $brandList = "";
+        foreach ($this->enabledSwitchs as $s) {
+            $brandList .= explode(",", $s)[1] . "\n";
+        }
+        return $brandList;
+    }
+
+    public function getEnabledModelsByBrand($brand)
+    {
+        $finalList = "";
+        $brandString = array_keys($this->availableModels)[$brand - 1];
+        $modelList = $this->getModelByBrands($brandString);
+        foreach ($modelList as $model) {
+            foreach ($this->enabledSwitchs as $switch) {
+                if (explode(",", $switch)[2] == str_replace(array("\n", "\r"), '', $model)) {
+                    $finalList .= explode(",", $switch)[2] . ",";
+                }
+            }
+        }
+        return $finalList;
+    }
+
+    public function getNamesByModelsAndBrand($brand, $model)
+    {
+        $finalList = "";
+        $brandString = array_keys($this->availableModels)[$brand - 1];
+        $modelString = str_replace(array("\n", "\r"), '', explode(",", $this->getModelByBrands($brandString))[$model - 1]);
+        foreach ($this->enabledSwitchs as $switch) {
+            if (explode(",", $switch)[2] == str_replace(array("\n", "\r"), '', $modelString)) {
+                $finalList .= explode(",", $switch)[0] . ",";
+            }
+        }
+        return $finalList;
+    }
 
 }
