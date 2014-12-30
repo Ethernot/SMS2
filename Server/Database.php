@@ -36,7 +36,7 @@ class Database
             error_reporting(1);
         }
 
-        if (!file_exists('../Data/enabledSwitchList.txt')) {
+        if (file_exists('../Data/enabledSwitchList.txt')) {
             $file = fopen("../Data/enabledSwitchList.txt", "r") or die("Unable to open file!");
             $switchList = "";
             while (!feof($file)) {
@@ -48,7 +48,7 @@ class Database
             }
         }
 
-        if (!file_exists('../Data/disabledSwitchList.txt')) {
+        if (file_exists('../Data/disabledSwitchList.txt')) {
             $file = fopen("../Data/disabledSwitchList.txt", "r") or die("Unable to open file!");
             $switchList = "";
             while (!feof($file)) {
@@ -188,8 +188,8 @@ class Database
 
     public function renameFolders($oldName, $newName)
     {
-        rename("../Logs/" . $oldName, "../Logs/" . $newName);
-        rename("../Configs/" . $oldName, "../Configs/" . $newName);
+        rename("../Logs/" . $oldName, "Logs/" . $newName);
+        rename("../Configs/" . $oldName, "Configs/" . $newName);
     }
 
     public function saveToHistory($name, $oldInfo)
