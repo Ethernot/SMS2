@@ -11,15 +11,28 @@
     <span>**Switch Management Software**</span>
 </header>
 
+<div class="mainContainer">
+    <?php
+    require_once("../Server/Database.php");
+    $db = new Database();
+    $info = $db->getAllSwitchesName();
+    $switchesNameList = explode(",",$info);
+    error_reporting(0);
+
+    error_reporting(1);
+    echo "<h1>All switches: </h1>";
+    foreach($switchesNameList as $a){
+        echo "<form action='CheckAllSwitches.php' method='post'>";
+
+        echo "</form>";
+    }
+    ?>
+
 
 <br>
-<button onclick="goBack()">Go Back</button>
+<a href="../index.php"><button>Go Home</button></a>
+</div>
 
-<script>
-    function goBack() {
-        window.history.back()
-    }
-</script>
 <footer class="mainFooter">
     <p>Copyright &copy; <span>Ethernot Team</span></p>
 </footer>
