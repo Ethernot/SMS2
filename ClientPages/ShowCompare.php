@@ -12,11 +12,15 @@
 </header>
 <div class="mainContainer">
     <?php
+    error_reporting(0);
     $name = $_POST['name'];
-    $conf = $_POST['conf'];
+    $conf1 = $_POST['conf1'];
     $conf2 = $_POST['conf2'];
-    $file = file_get_contents('configs/' . $name . '/' . $conf, true);
-    echo $file;
+    error_reporting(1);
+    echo $name."<br>";
+    echo $conf1;
+//    $file = file_get_contents('configs/' . $name . '/' . $conf, true);
+//    echo $file;
     ?>
 </div>
 

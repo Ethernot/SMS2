@@ -18,6 +18,7 @@
     $brandSelected = $_POST['brand'];
     $modelSelected = $_POST['model'];
     $nameSelected = $_POST['name'];
+    $conf1Selected = $_POST['conf1'];
     error_reporting(1);
 
     require_once("../Server/Database.php");
@@ -47,8 +48,6 @@
         echo "<label> Model: </label>";
         if ($brandSelected > 0) {
             $switchesModelList = explode(",", $db->getEnabledModelsByBrand($switchesBrandList[$brandSelected - 1]));
-//            print_r($switchesModelList);
-//            echo "...: ".$db->getEnabledModelsByBrand($switchesBrandList[$brandSelected-1]);
             echo '<select name="model" id="sel2" oninput="activeNameSelect()">';
         } else {
             echo '<select name="model" id="sel2" disabled="true" oninput="activeNameSelect()">';
@@ -69,7 +68,7 @@
         echo '</select>';
         echo "</form>";
 
-        echo '<form name="f3" action="Comparison.php" method="post">';
+        echo '<form id="f3" action="Comparison.php" method="post">';
         echo '<input type="hidden" name="brand" value="' . $brandSelected . '">';
         echo '<input type="hidden" name="model" value="' . $modelSelected . '">';
         echo "<label> Name: </label>";
@@ -83,29 +82,56 @@
         $i = 1;
         foreach ($switchesNameList as $a) {
             if (strlen($a) > 1) {
-                echo '<option value=' . $i++ . '>' . $a . '</option>';
+                if ($nameSelected == $i) {
+                    echo '<option selected="selected" value=' . $i . '>' . $a . '</option>';
+                } else {
+                    echo '<option value=' . $i . '>' . $a . '</option>';
+                }
+                $i++;
             }
         }
         echo '</select>';
         echo "</form>";
 
-        echo "<form id='f4' method='post' action='ShowCompare.php'>";
+        echo "<form id='f4' method='post' action='Comparison.php'>";
         echo '<input type="hidden" name="brand" value="' . $brandSelected . '">';
         echo '<input type="hidden" name="model" value="' . $modelSelected . '">';
         echo '<input type="hidden" name="name" value="' . $nameSelected . '">';
-        $switchesConfsList = explode(",", "asdsad,asda,das,dsa,sad,asd,sa,das");
         echo "<label> Configuration 1: </label>";
-        echo '<select name="conf1" required="true" id="sel4" disabled="true" oninput="">';
+        if ($nameSelected > 0) {
+            $switchesConfsList = explode(",", $db->getConfs($switchesNameList[$nameSelected - 1]));
+            echo '<select name="conf1" id="sel4" oninput="activeCheckConf()">';
+        } else {
+            echo '<select name="conf1" id="sel4" disabled="true" oninput="activeCheckConf()">';
+        }
         echo '<option disabled="disabled" selected="selected">Please select configuration</option>';
         foreach ($switchesConfsList as $a) {
-            if (strlen($a) > 0) {
-                echo '<option value=' . $a . '>' . $a . '</option>';
+            if (strlen($a) > 1) {
+                if ($conf1Selected == $i) {
+                    echo '<option selected="selected" value=' . $i . '>' . $a . '</option>';
+                } else {
+                    echo '<option value=' . $i . '>' . $a . '</option>';
+                }
+                $i++;
             }
         }
         echo '</select>';
         echo "<br>";
-        echo '<input type="submit" value="Add to comparison" disabled="true" id="atc" >';
         echo '</form>';
+
+
+        echo "<form id='f6' action='ShowCompare.php' method='post'>";
+        echo '<input type="hidden" name="brand" value="' . $brandSelected . '">';
+        echo '<input type="hidden" name="model" value="' . $modelSelected . '">';
+        echo '<input type="hidden" name="name" value="' . $switchesNameList[$nameSelected-1] . '">';
+        echo '<input type="hidden" name="conf1" value="' . $switchesConfsList[$conf1Selected-1] . '">';
+        if($conf1Selected>0){
+            echo "<input type='submit' value='Check configuration'> ";
+        }else{
+        echo "<input type='submit' disabled='true' value='Check configuration'> ";
+
+        }
+        echo "</form>";
     } else {
         echo "No switches inserted <br><br>";
     }
@@ -126,6 +152,10 @@
         function activeConfSelect() {
             document.getElementById("sel4").disabled = false;
             document.getElementById("f3").submit();
+        }
+        function activeCheckConf(){
+            alert("sadfd");
+            document.getElementById("f4").submit();
         }
         function activeButtons() {
             document.getElementById("atc").disabled = false;
