@@ -67,15 +67,15 @@ class Database
         if (!file_exists('../Data/enabledSwitchList.txt'))
             mkdir('../Data', 0777, true);
 
-        $file = fopen("../Data/enabledSwitchList.txt", "a") or die("Unable to open file!");
+        $file = fopen("../Data/enabledSwitchList.txt", "w") or die("Unable to open file!");
         foreach ($this->enabledSwitchs as $s) {
-            fwrite($file, $s . '/');
+            fwrite($file, $this->getSwitchInfo(explode(",", $s)[0]) . "\n");
         }
         fclose($file);
 
-        $file = fopen("../Data/disabledSwitchList.txt", "a") or die("Unable to open file!");
+        $file = fopen("../Data/disabledSwitchList.txt", "w") or die("Unable to open file!");
         foreach ($this->disabledSwitchs as $s) {
-            fwrite($file, $s . '/');
+            fwrite($file, $this->getSwitchInfo(explode(",", $s)[0]) . "\n");
         }
         fclose($file);
     }
@@ -100,8 +100,8 @@ class Database
 
     public function addNewSwitch($brand, $model, $name, $ip, $access, $username, $password)
     {
-        $brandString = array_keys($this->availableModels)[$brand];
-        $modelString = explode(",",$this->getModelByBrands($brandString))[$model];
+        $brandString = array_keys($this->availableModels)[$brand-1];
+        $modelString = explode(",",$this->getModelByBrands($brandString))[$model-1];
         $newSwitch = $name . ',' . $brandString . ',' . $modelString . ',' . $ip . ',' . $username . ',' . $password . ',' . $access . "/";
         array_push($this->enabledSwitchs, $newSwitch);
         $this->saveInfo();
@@ -141,6 +141,11 @@ class Database
     public function getSwitchInfo($name)
     {
         foreach ($this->enabledSwitchs as $s) {
+            if (explode(",", $s)[0] == $name) {
+                return $s;
+            }
+        }
+        foreach ($this->disabledSwitchs as $s) {
             if (explode(",", $s)[0] == $name) {
                 return $s;
             }
