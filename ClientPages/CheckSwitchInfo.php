@@ -20,7 +20,6 @@ echo"
     require_once("../Server/Database.php");
     $db = new Database();
     $actualInfo = $db->getSwitchInfoByInt($brand, $model, $name);
-    //    echo "..."+$name;
     $actualInfoArray = explode(",", $actualInfo);
     ?>
     <?php
@@ -33,18 +32,32 @@ echo"
     echo "<label> user: " . $actualInfoArray[4] . " </label><br>";
 
     echo "<form action='ModifySwitch.php' method='post'>";
-    echo "<input type='hidden' value='" . $actualInfo . "'>";
-    echo "<input type='submit' value='Modify'>";
+    $actualInfo=str_replace(" ","*",$actualInfo);
+    echo "<input type='hidden' name='info' value=".$actualInfo.">";
+    echo "<input type='submit' value='Modify switch'>";
     echo "</form>";
 
-//historico de configurações
+    echo "<form action='SwitchHistory.php' method='post'>";
+    echo "<input type='hidden' value='" . $actualInfo . "'>";
+    echo "<input type='submit' value='Switch History'>";
+    echo "</form>";
+
+    echo "<form action='GetConfigurationNow.php' method='post'>";
+    echo "<input type='hidden' value='" . $actualInfo . "'>";
+    echo "<input type='submit' value='Get configuration now'>";
+    echo "</form>";
+
+//histori
 
     ?>
-    <a href="SwitchManagement.php">
-        <button>Get back</button>
-    </a>
+    <button onclick="goBack()"> Go Back</button>
 </div>
 
+<script>
+    function goBack() {
+        window.history.back()
+    }
+</script>
 
 <footer class="mainFooter">
     <p>Copyright &copy; <span>Ethernot Team</span></p>
