@@ -241,6 +241,7 @@ class Database
         foreach ($this->disabledSwitchs as $s) {
             $switchsList .= explode(",", $s)[0] . ",";
         }
+        return $switchsList;
     }
 
     public function isSwitchEnabled($name)

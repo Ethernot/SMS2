@@ -43,7 +43,7 @@ echo"
     echo "</form>";
 
     echo "<form action='GetConfigurationNow.php' method='post'>";
-    echo "<input type='hidden' value='" . $actualInfo . "'>";
+    echo "<input type='hidden' name='name' value='" . $actualInfoArray[0] . "'>";
     echo "<input type='submit' value='Get configuration now'>";
     echo "</form>";
 

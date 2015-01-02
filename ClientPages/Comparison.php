@@ -178,7 +178,7 @@
         }
         echo "</form>";
     } else {
-        echo "No switches inserted <br><br>";
+        echo "No switches available<br>";
     }
 
     ?>

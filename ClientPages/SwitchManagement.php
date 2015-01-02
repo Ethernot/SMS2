@@ -19,8 +19,6 @@
     $brandSelected = $_POST['brand'];
     $modelSelected = $_POST['model'];
     error_reporting(1);
-//    echo "sdfv: " . $modelSelected;
-    //    $switchesModelList=array();
     $switchesBrandList = explode("\n", $db->getEnabledBrands());
     if (count($switchesBrandList) > 1) {
         echo '<form id="f1" action="SwitchManagement.php" method="post">';
@@ -47,8 +45,6 @@
         echo "<label> Model: </label>";
         if ($brandSelected > 0) {
             $switchesModelList = explode(",", $db->getEnabledModelsByBrand($switchesBrandList[$brandSelected-1]));
-//            print_r($switchesModelList);
-//            echo "...: ".$db->getEnabledModelsByBrand($switchesBrandList[$brandSelected-1]);
             echo '<select name="model" id="sel2" oninput="activeNameSelect()">';
         } else {
             echo '<select name="model" id="sel2" disabled="true" oninput="activeNameSelect()">';
@@ -91,7 +87,7 @@
         echo "<input type='submit' value='Check Switch' id='cs' disabled='true'>";
         echo "</form>";
     } else {
-        echo "<label>No switches inserted</label><br>";
+        echo "<label>No switches available</label><br>";
     }
 
     function replaceSpaces($array)
