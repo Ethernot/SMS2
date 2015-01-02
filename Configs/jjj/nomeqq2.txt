@@ -1,0 +1,36 @@
+********************************************************************************
+
+<4210>
+#
+ sysname 4210
+#
+ undo password-control aging enable
+ undo password-control length enable
+ undo password-control history enable
+ password-control login-attempt 3 exceed lock-time 120
+#
+ local-server nas-ip 127.0.0.1 key 3com
+
+#
+ igmp-snooping enable
+%May 19 21:12:42:175 2000 4210 SHELL/5/LOGIN:- 1 - monitor(10.11.0.202) in unit1 login
+#
+radius scheme system
+#
+domain system
+#
+local-user admin
+ password cipher $8%X"^*P$3/Q=^Q`MAF4<1!!
+ service-type ssh telnet terminal
+ level 3
+local-user monitor
+ password cipher 57.+#*!05PSQ=^Q`MAF4<1!!
+ service-type ssh telnet terminal
+
+ igmp-snooping enable
+#
+vlan 2
+ description VLAN_AULAS_TESTE
+#
+interface Vlan-interface1
+ ip address 10.17.0.6 255.255.255.0

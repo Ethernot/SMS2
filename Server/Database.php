@@ -307,7 +307,9 @@ class Database
         $confsList = "";
         $dir = opendir("../Configs/".$name);
         while(($file = readdir($dir)) != false){
-            $confsList .= str_replace(".txt","",$file) . ",";
+            if ($file!="." && $file!="..") {
+                $confsList .= str_replace(".txt", "", $file) . ",";
+            }
         }
         return $confsList;
     }

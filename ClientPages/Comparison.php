@@ -99,6 +99,7 @@
         echo '<input type="hidden" name="model" value="' . $modelSelected . '">';
         echo '<input type="hidden" name="name" value="' . $nameSelected . '">';
         echo "<label> Configuration 1: </label>";
+        $switchesConfsList=array();
         if ($nameSelected > 0) {
             $switchesConfsList = explode(",", $db->getConfs($switchesNameList[$nameSelected - 1]));
             echo '<select name="conf1" id="sel4" oninput="activeCheckConf()">';
@@ -106,6 +107,7 @@
             echo '<select name="conf1" id="sel4" disabled="true" oninput="activeCheckConf()">';
         }
         echo '<option disabled="disabled" selected="selected">Please select configuration</option>';
+        $i=1;
         foreach ($switchesConfsList as $a) {
             if (strlen($a) > 1) {
                 if ($conf1Selected == $i) {
@@ -120,42 +122,46 @@
         echo "<br>";
         echo '</form>';
 
-        echo "<form id='f5' method='post' action='Comparison.php'>";
-        echo '<input type="hidden" name="brand" value="' . $brandSelected . '">';
-        echo '<input type="hidden" name="model" value="' . $modelSelected . '">';
-        echo '<input type="hidden" name="name" value="' . $nameSelected . '">';
-        echo '<input type="hidden" name="conf1" value="' . $conf1Selected . '">';
-        echo "<label> Configuration 2: </label>";
-        $switchesConfsList = explode(",", $db->getConfs($switchesNameList[$nameSelected - 1]));
-        unset($switchesConfsList[$conf1Selected - 1]);
-        if ($conf2Selected > 0) {
-            echo '<select name="conf2" id="sel5" oninput="activeCheckConf2()">';
-        } else {
-            echo '<select name="conf2" id="sel5" disabled="true" oninput="activeCheckConf2()">';
-        }
-        echo '<option disabled="disabled" selected="selected">Please select configuration</option>';
-        foreach ($switchesConfsList as $a) {
-            if (strlen($a) > 1) {
-                if ($conf2Selected == $i) {
-                    echo '<option selected="selected" value=' . $i . '>' . $a . '</option>';
-                } else {
-                    echo '<option value=' . $i . '>' . $a . '</option>';
-                }
-                $i++;
+        if ($conf1Selected > 0) {
+            echo "<form id='f5' method='post' action='Comparison.php'>";
+            echo '<input type="hidden" name="brand" value="' . $brandSelected . '">';
+            echo '<input type="hidden" name="model" value="' . $modelSelected . '">';
+            echo '<input type="hidden" name="name" value="' . $nameSelected . '">';
+            echo '<input type="hidden" name="conf1" value="' . $conf1Selected . '">';
+            echo "<label> Configuration 2: </label>";
+            $switchesConfsList2=array();
+            $switchesConfsList2 = explode(",", $db->getConfs($switchesNameList[$nameSelected - 1]));
+            unset($switchesConfsList2[$conf1Selected - 1]);
+            $switchesConfsList2=array_values($switchesConfsList2);
+            if ($conf2Selected > 0) {
+                echo '<select name="conf2" id="sel5" oninput="activeCheckConf2()">';
+            } else {
+                echo '<select name="conf2" id="sel5" disabled="true" oninput="activeCheckConf2()">';
             }
+            echo '<option disabled="disabled" selected="selected">Please select configuration</option>';
+            $i=1;
+            foreach ($switchesConfsList2 as $a) {
+                if (strlen($a) > 1) {
+                    if ($conf2Selected == $i) {
+                        echo '<option selected="selected" value=' . $i . '>' . $a . '</option>';
+                    } else {
+                        echo '<option value=' . $i . '>' . $a . '</option>';
+                    }
+                    $i++;
+                }
+            }
+            echo '</select>';
+            echo "<br>";
+            echo '</form>';
+
         }
-        echo '</select>';
-        echo "<br>";
-        echo '</form>';
-
         echo '<button onclick="activef5()"> Add other configuration </button>';
-
         echo "<form id='f6' action='ShowCompare.php' method='post'>";
         echo '<input type="hidden" name="brand" value="' . $brandSelected . '">';
         echo '<input type="hidden" name="model" value="' . $modelSelected . '">';
         echo '<input type="hidden" name="name" value="' . $switchesNameList[$nameSelected - 1] . '">';
         echo '<input type="hidden" name="conf1" value="' . $switchesConfsList[$conf1Selected - 1] . '">';
-        echo '<input type="hidden" name="conf2" value="' . $switchesConfsList[$conf2Selected - 1] . '">';
+        echo '<input type="hidden" name="conf2" value="' . $switchesConfsList2[$conf2Selected - 1] . '">';
         if ($conf1Selected > 0 && $conf2Selected < 1) {
             echo "<input type='submit' value='Check configuration'> ";
         } else {
@@ -172,7 +178,7 @@
 
     ?>
     <br>
-    <button onclick="goBack()">Go Back</button>
+    <a href="../index.php"><button>Go Back</button></a>
 
     <script>
         function activeModelSelect() {
@@ -198,9 +204,6 @@
         }
         function activef5() {
             document.getElementById("sel5").disabled = false;
-        }
-        function goBack() {
-            window.history.back()
         }
     </script>
 </div>
