@@ -79,7 +79,7 @@
     echo "<input type='hidden' name='newModel' value=".$auxNewModel.">";
     echo "<label>Name: </label> <input type='text' name='newName' value=" . $actualInfoArray[0] . "> <br>";
     echo "<label>IP: </label> <input type='text' name='newIp' value=" . $actualInfoArray[3] . "> <br>";
-    echo "<label>Access by: </label> <input type='text' name='newAccess' value=" . $actualInfoArray[6] . "> <br>";
+    echo "<label>Access by:</label>";
     if (strcmp($actualInfoArray[6],"ssh")==0) {
         echo '<br> <input type="radio" name="newAccess" value="ssh" checked="true"> SSH ';
         echo '<br> <input type="radio" name="newAccess" value="telnet" > Telnet <br>';
