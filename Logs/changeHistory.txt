@@ -100,3 +100,14 @@
 ->> 2015-01-03 08:59:45pm enabled Switch 1234
 ->> 2015-01-03 09:08:51pm disabled Switch 1234
 ->> 2015-01-03 09:08:56pm enabled Switch 1234
+->> 2015-01-04 07:13:16pm disabled Switch 1234
+->> 2015-01-04 07:13:39pm enabled Switch 1234
+->> 2015-01-04 07:13:48pm disabled Switch 1234
+->> 2015-01-04 07:14:05pm disabled Switch 1234
+->> 2015-01-04 07:14:11pm enabled Switch 1234
+->> 2015-01-04 07:14:18pm disabled Switch 1234
+->> 2015-01-04 07:14:36pm enabled Switch 1234
+->> 2015-01-04 07:14:39pm disabled Switch 1234
+->> 2015-01-04 07:18:46pm enabled Switch 1234
+->> 2015-01-04 09:43:28pm Added a new Switch with the name cenas
+->> 2015-01-04 10:31:46pm Added a new Switch with the name sadsadf

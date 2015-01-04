@@ -37,12 +37,12 @@
             echo "<label >Switch name: " . $a . "</label><br>";
             if ($db->isSwitchEnabled($a)) {
                 echo "<input type='hidden' name='name' value=" . $a . ">";
-                echo 'Enable <input type="radio" name="option" checked="true" value="enable" onchange="activeForm(' . $i . ')">';
-                echo 'Disabled <input type="radio" name="option" value="disable" onchange="activeForm(' . $i . ')">';
+                echo 'Enable <input type="radio" id="r1" name="option" checked="true" value="enable" onchange="activeForm(' . $i . ')">';
+                echo 'Disabled <input type="radio" id="r2" name="option" value="disable" onchange="activeForm(' . $i . ')">';
             } else {
                 echo "<input type='hidden' name='name' value=" . $a . ">";
-                echo 'Enable <input type="radio" name="option" value="enable" onchange="activeForm(' . $i . ')">';
-                echo 'Disabled <input type="radio" name="option" checked="true" value="disable" onchange="activeForm(' . $i . ')">';
+                echo 'Enable <input type="radio" id="r1" name="option" value="enable" onchange="activeForm(' . $i . ')">';
+                echo 'Disabled <input type="radio" id="r2" name="option" checked="true" value="disable" onchange="activeForm(' . $i . ')">';
             }
             $i++;
         }
@@ -57,7 +57,7 @@
 
 <script>
     function activeForm(form) {
-//        alert(form);
+        alert("Update sucessfully!");
         document.getElementById(form).submit();
     }
 </script>

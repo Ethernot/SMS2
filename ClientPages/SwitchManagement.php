@@ -20,6 +20,7 @@
     $modelSelected = $_POST['model'];
     error_reporting(1);
     $switchesBrandList = explode("\n", $db->getEnabledBrands());
+    $switchesBrandList=array_unique($switchesBrandList);
     if (count($switchesBrandList) > 1) {
         echo '<form id="f1" action="SwitchManagement.php" method="post">';
         echo "<label> Brand: </label>";
@@ -45,6 +46,7 @@
         echo "<label> Model: </label>";
         if ($brandSelected > 0) {
             $switchesModelList = explode(",", $db->getEnabledModelsByBrand($switchesBrandList[$brandSelected-1]));
+            $switchesModelList=array_unique($switchesModelList);
             echo '<select name="model" id="sel2" oninput="activeNameSelect()">';
         } else {
             echo '<select name="model" id="sel2" disabled="true" oninput="activeNameSelect()">';

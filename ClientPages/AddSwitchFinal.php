@@ -14,22 +14,27 @@
 
     <?php
     require_once("../Server/Database.php");
+
     $newName = $_POST['name'];
     $newBrand = $_POST['brand'];
-    $newModel=$_POST['model'];
-    $newIp=$_POST['ip'];
-    $newAccess=$_POST['access'];
-    $newUser=$_POST['username'];
-    $newPassword=$_POST['password'];
+    $newModel = $_POST['model'];
+    $newIp = $_POST['ip'];
+    $newAccess = $_POST['access'];
+    $newUser = $_POST['username'];
+    $newPassword = $_POST['password'];
     $db = new Database();
-//    addNewSwitch($brand, $model, $name, $ip, $access, $username, $password)
-    $db->addNewSwitch($newBrand,$newModel,$newName,$newIp,$newAccess,$newUser,$newPassword);
+    $encryptPw = sha1($newPassword);
+    $db->savePassword($newPassword,$encryptPw);
+    $db->addNewSwitch($newBrand,$newModel,$newName,$newIp,$newAccess,$newUser,$encryptPw);
     echo "<h1>New Switch added with success!</h1>";
+
     ?>
 
 
     <br>
-    <a href="../index.php"><button>Go Home</button></a>
+    <a href="../index.php">
+        <button>Go Home</button>
+    </a>
 </div>
 <footer class="mainFooter">
     <p>Copyright &copy; <span>Ethernot Team</span></p>

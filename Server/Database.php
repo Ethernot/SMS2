@@ -73,10 +73,9 @@ class Database
                 $info .= fgets($file);
             }
             fclose($file);
-            $this->configsTime = explode("\n",$info)[0];
-            $this->configsInterval = explode("\n",$info)[1];
+            $this->configsTime = explode("\n", $info)[0];
+            $this->configsInterval = explode("\n", $info)[1];
         }
-
 
 
     }
@@ -175,9 +174,9 @@ class Database
         }
     }
 
-    public function getSwitchInfoByInt($brand,$model,$name)
+    public function getSwitchInfoByInt($brand, $model, $name)
     {
-         $aux=explode(",",$this->getEnabledNamesByModelsAndBrand($brand,$model))[$name-1];
+        $aux = explode(",", $this->getEnabledNamesByModelsAndBrand($brand, $model))[$name - 1];
         return $this->getSwitchInfo($aux);
     }
 
@@ -247,6 +246,32 @@ class Database
 
     }
 
+//    ------------PASSWORDS
+
+    public function savePassword($pwDes, $pwEnc)
+    {
+        if (!file_exists('../Data/passwords.txt'))
+            mkdir('../Data', 0777, true);
+
+        $file = fopen("../Data/passwords.txt", "a") or die("Unable to open file!");
+        fwrite($file, $pwDes . "," . $pwEnc . "\n");
+        fclose($file);
+    }
+
+    public function getPwSha1($encpw)
+    {
+        $file = fopen("../Data/passwords.txt", "r") or die("Unable to open file!");
+        echo "-> ".$file;
+        foreach(explode("\n",$file) as $i){
+            if(strcmp(explode(",",$i)[1],$encpw)==0)
+                return explode(",",$i)[0];
+        }
+        fclose($file);
+        return null;
+    }
+
+//    ------------PASSWORDS
+
     public function getAllSwitchsNames()
     {
         $switchsList = "";
@@ -282,7 +307,7 @@ class Database
     {
         $finalList = "";
         $modelList = $this->getModelByBrands($brand);
-        $modelList = explode(",",$modelList);
+        $modelList = explode(",", $modelList);
         foreach ($modelList as $model) {
             foreach ($this->enabledSwitchs as $switch) {
                 if (explode(",", $switch)[2] == str_replace(array("\n", "\r"), '', $model)) {
@@ -310,7 +335,7 @@ class Database
         if (file_exists("../Logs/changeHistory.txt")) {
             $file = fopen("../Logs/changeHistory.txt", "r") or die("Unable to open file!");
             while (!feof($file)) {
-                if ($file!="." && $file!="..") {
+                if ($file != "." && $file != "..") {
                     $logs .= fgets($file);
                 }
             }
@@ -319,21 +344,23 @@ class Database
         return $logs;
     }
 
-    public function getConfs($name){
+    public function getConfs($name)
+    {
         $confsList = "";
-        $dir = opendir("../Configs/".$name);
-        while(($file = readdir($dir)) != false){
-            if ($file!="." && $file!="..") {
+        $dir = opendir("../Configs/" . $name);
+        while (($file = readdir($dir)) != false) {
+            if ($file != "." && $file != "..") {
                 $confsList .= str_replace(".txt", "", $file) . ",";
             }
         }
         return $confsList;
     }
 
-    public function getConfigInfo($name, $config){
+    public function getConfigInfo($name, $config)
+    {
         $confInfo = "";
-        if (file_exists("../Configs/".$name."/".$config.".txt")) {
-            $file = fopen("../Configs/".$name."/".$config.".txt", "r") or die("Unable to open file!");
+        if (file_exists("../Configs/" . $name . "/" . $config . ".txt")) {
+            $file = fopen("../Configs/" . $name . "/" . $config . ".txt", "r") or die("Unable to open file!");
             while (!feof($file)) {
                 $confInfo .= fgets($file);
             }
