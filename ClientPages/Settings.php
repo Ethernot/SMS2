@@ -20,6 +20,7 @@
     echo "<form id='f' action='Settings.php' method='post'>";
     echo "<label> update interval: </label>";
     echo "</form>";
+
     ?>
 
     <br>
