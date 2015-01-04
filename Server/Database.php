@@ -11,6 +11,8 @@ class Database
     public $availableModels;
     public $enabledSwitchs;
     public $disabledSwitchs;
+    public $configsInterval;
+    public $configsTime;
 
 
     function __construct()
@@ -24,12 +26,12 @@ class Database
     function loadInfo()
     {
         $file = fopen("../Data/switchList.txt", "r") or die("Unable to open file!");
-        $switchList = "";
+        $info = "";
         while (!feof($file)) {
-            $switchList .= fgets($file);
+            $info .= fgets($file);
         }
         fclose($file);
-        foreach (explode("\n", $switchList) as $s) {
+        foreach (explode("\n", $info) as $s) {
             $switch = explode("-", $s);
             error_reporting(0);
             $this->availableModels[$switch[0]] .= $switch[1];
@@ -38,12 +40,12 @@ class Database
 
         if (file_exists('../Data/enabledSwitchList.txt')) {
             $file = fopen("../Data/enabledSwitchList.txt", "r") or die("Unable to open file!");
-            $switchList = "";
+            $info = "";
             while (!feof($file)) {
-                $switchList .= fgets($file);
+                $info .= fgets($file);
             }
             fclose($file);
-            foreach (explode("\n", $switchList) as $s) {
+            foreach (explode("\n", $info) as $s) {
                 if (strlen($s) > 1) {
                     array_push($this->enabledSwitchs, $s);
                 }
@@ -52,17 +54,30 @@ class Database
 
         if (file_exists('../Data/disabledSwitchList.txt')) {
             $file = fopen("../Data/disabledSwitchList.txt", "r") or die("Unable to open file!");
-            $switchList = "";
+            $info = "";
             while (!feof($file)) {
-                $switchList .= fgets($file);
+                $info .= fgets($file);
             }
             fclose($file);
-            foreach (explode("\n", $switchList) as $s) {
+            foreach (explode("\n", $info) as $s) {
                 if (strlen($s) > 1) {
                     array_push($this->disabledSwitchs, $s);
                 }
             }
         }
+
+        if (file_exists('../Server/configs.txt')) {
+            $file = fopen("../Server/configs.txt", "r") or die("Unable to open file!");
+            $info = "";
+            while (!feof($file)) {
+                $info .= fgets($file);
+            }
+            fclose($file);
+            $this->configsTime = explode("\n",s)[0];
+            $this->configsInterval = explode("\n",s)[1];
+        }
+
+
 
     }
 
@@ -326,5 +341,17 @@ class Database
         }
         return $confInfo;
     }
+
+
+    public function getConfigsTime()
+    {
+        return $this->configsTime;
+    }
+
+    public function getConfigsInterval()
+    {
+        return $this->configsInterval;
+    }
+
 
 }
