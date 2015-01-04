@@ -1,1 +1,1 @@
-dell 5548p,DELL,PowerConnect 5548P,192.168.1.108,monitor,monitor,ssh
+sw1,DELL,PowerConnect 5548P,123123213,123123123,e8775608d84f4370401fb1588f005e07e878dd20,ssh

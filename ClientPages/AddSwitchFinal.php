@@ -12,20 +12,23 @@
         </header>
         <div class="mainContainer">
 
-            <?php
-            require_once("../Server/Database.php");
-            $newName = $_POST['name'];
-            $newBrand = $_POST['brand'];
-            $newModel = $_POST['model'];
-            $newIp = $_POST['ip'];
-            $newAccess = $_POST['access'];
-            $newUser = $_POST['username'];
-            $newPassword = $_POST['password'];
-            $db = new Database();
-            //    addNewSwitch($brand, $model, $name, $ip, $access, $username, $password)
-            $db->addNewSwitch($newBrand, $newModel, $newName, $newIp, $newAccess, $newUser, $newPassword);
-            echo "<h1>New Switch added with success!</h1>";
-            ?>
+    <?php
+    require_once("../Server/Database.php");
+
+    $newName = $_POST['name'];
+    $newBrand = $_POST['brand'];
+    $newModel = $_POST['model'];
+    $newIp = $_POST['ip'];
+    $newAccess = $_POST['access'];
+    $newUser = $_POST['username'];
+    $newPassword = $_POST['password'];
+    $db = new Database();
+    $encryptPw = sha1($newPassword);
+    $db->savePassword($newPassword,$encryptPw);
+    $db->addNewSwitch($newBrand,$newModel,$newName,$newIp,$newAccess,$newUser,$encryptPw);
+    echo "<h1>New Switch added with success!</h1>";
+
+    ?>
 
 
         </div>

@@ -249,11 +249,38 @@ class Database
     {
         if (!file_exists('../Logs/changeHistory.txt'))
             mkdir('../Logs', 0777, true);
+
         $file = fopen("../Logs/changeHistory.txt", "a") or die("Unable to open file!");
         fwrite($file, $info . "\n");
         fclose($file);
 
     }
+
+//    ------------PASSWORDS
+
+    public function savePassword($pwDes, $pwEnc)
+    {
+        if (!file_exists('../Data/passwords.txt'))
+            mkdir('../Data', 0777, true);
+
+        $file = fopen("../Data/passwords.txt", "a") or die("Unable to open file!");
+        fwrite($file, $pwDes . "," . $pwEnc . "\n");
+        fclose($file);
+    }
+
+    public function getPwSha1($encpw)
+    {
+        $file = fopen("../Data/passwords.txt", "r") or die("Unable to open file!");
+        echo "-> ".$file;
+        foreach(explode("\n",$file) as $i){
+            if(strcmp(explode(",",$i)[1],$encpw)==0)
+                return explode(",",$i)[0];
+        }
+        fclose($file);
+        return null;
+    }
+
+//    ------------PASSWORDS
 
     public function getAllSwitchsNames()
     {
