@@ -3,3 +3,4 @@
 2015-01-04 07:59:02pm disabled Switch 1234
 2015-01-04 07:59:03pm enabled Switch 1234
 2015-01-04 07:59:04pm disabled Switch 1234
+2015-01-04 10:52:17pm Added a new Switch with the name sw1

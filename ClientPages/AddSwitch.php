@@ -64,6 +64,8 @@
             }
         }
         echo '</select>';
+        $switchesNameList = explode(",", $db->getAllSwitchsNames());
+
         echo '<br><label>Name: </label><input type="text" name="name" required="true">';
         echo '<br><label>IP: </label><input type="text" name="ip" required="true">';
         echo '<br><label>Accessed by: </label> <br>';
