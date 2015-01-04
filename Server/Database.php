@@ -181,7 +181,7 @@ class Database
         return $this->getSwitchInfo($aux);
     }
 
-    public function getSwitchHistory($name, $i)
+    public function getSwitchHistory($name)
     {
         $file = fopen("../Logs/" . $name . "/history.txt", "r") or die("Unable to open file!");
         $switchList = "";
@@ -190,14 +190,14 @@ class Database
         }
         fclose($file);
         $historyList = array();
-        $detailHistory = array();
+//        $detailHistory = array();
         foreach (explode("/", $switchList) as $s) {
             array_push($historyList, $s);
         }
-        foreach ($historyList as $s) {
-            array_push($detailHistory, explode(",", $s)[$i]);
-        }
-        return array_unique($detailHistory);
+//        foreach ($historyList as $s) {
+//            array_push($detailHistory, explode(",", $s)[$i]);
+//        }
+        return array_unique($historyList);
     }
 
     public function modifySwitchInfo($oldName, $brand, $model, $name, $ip, $access, $username, $password)
@@ -222,8 +222,8 @@ class Database
 
     public function renameFolders($oldName, $newName)
     {
-        rename("../Logs/" . $oldName, "Logs/" . $newName);
-        rename("../Configs/" . $oldName, "Configs/" . $newName);
+        rename("../Logs/" . $oldName, "../Logs/" . $newName);
+        rename("../Configs/" . $oldName, "../Configs/" . $newName);
     }
 
     public function saveToHistory($name, $oldInfo)
@@ -256,6 +256,7 @@ class Database
         foreach ($this->disabledSwitchs as $s) {
             $switchsList .= explode(",", $s)[0] . ",";
         }
+        return $switchsList;
     }
 
     public function isSwitchEnabled($name)

@@ -25,7 +25,7 @@
     require_once("../Server/Database.php");
     $db = new Database();
     $switchesBrandList = explode("\n", $db->getEnabledBrands());
-    if (count($switchesBrandList) > 0) {
+    if (count($switchesBrandList) > 1) {
         echo '<form id="f1" action="Comparison.php" method="post">';
         echo "<label> Brand: </label>";
         echo '<select name="brand" id="sel1" oninput="activeModelSelect()">';
@@ -99,7 +99,7 @@
         echo '<input type="hidden" name="model" value="' . $modelSelected . '">';
         echo '<input type="hidden" name="name" value="' . $nameSelected . '">';
         echo "<label> Configuration 1: </label>";
-        $switchesConfsList=array();
+        $switchesConfsList = array();
         if ($nameSelected > 0) {
             $switchesConfsList = explode(",", $db->getConfs($switchesNameList[$nameSelected - 1]));
             echo '<select name="conf1" id="sel4" oninput="activeCheckConf()">';
@@ -107,7 +107,7 @@
             echo '<select name="conf1" id="sel4" disabled="true" oninput="activeCheckConf()">';
         }
         echo '<option disabled="disabled" selected="selected">Please select configuration</option>';
-        $i=1;
+        $i = 1;
         foreach ($switchesConfsList as $a) {
             if (strlen($a) > 1) {
                 if ($conf1Selected == $i) {
@@ -129,17 +129,17 @@
             echo '<input type="hidden" name="name" value="' . $nameSelected . '">';
             echo '<input type="hidden" name="conf1" value="' . $conf1Selected . '">';
             echo "<label> Configuration 2: </label>";
-            $switchesConfsList2=array();
+            $switchesConfsList2 = array();
             $switchesConfsList2 = explode(",", $db->getConfs($switchesNameList[$nameSelected - 1]));
             unset($switchesConfsList2[$conf1Selected - 1]);
-            $switchesConfsList2=array_values($switchesConfsList2);
+            $switchesConfsList2 = array_values($switchesConfsList2);
             if ($conf2Selected > 0) {
                 echo '<select name="conf2" id="sel5" oninput="activeCheckConf2()">';
             } else {
                 echo '<select name="conf2" id="sel5" disabled="true" oninput="activeCheckConf2()">';
             }
             echo '<option disabled="disabled" selected="selected">Please select configuration</option>';
-            $i=1;
+            $i = 1;
             foreach ($switchesConfsList2 as $a) {
                 if (strlen($a) > 1) {
                     if ($conf2Selected == $i) {
@@ -165,48 +165,56 @@
         if ($conf1Selected > 0 && $conf2Selected < 1) {
             echo "<input type='submit' value='Check configuration'> ";
         } else {
-            if ($conf2Selected > 0) {
+            if ($conf2Selected > 0 && $conf1Selected > 0) {
                 echo "<input type='submit' value='Compare configurations'> ";
             } else {
-                echo "<input type='submit' value='Check configuration'> ";
+                if ($conf1Selected > 0) {
+                    echo "<input type='submit' value='Check configuration'> ";
+                } else {
+                    echo "<input type='submit' disabled='true' value='Check configuration'> ";
+
+                }
             }
         }
         echo "</form>";
     } else {
-        echo "No switches inserted <br><br>";
+        echo "No switches available<br>";
     }
 
     ?>
     <br>
-    <a href="../index.php"><button>Go Back</button></a>
-
-    <script>
-        function activeModelSelect() {
-            document.getElementById("sel2").disabled = false;
-            document.getElementById("f1").submit();
-        }
-        function activeNameSelect() {
-            document.getElementById("sel3").disabled = false;
-            document.getElementById("f2").submit();
-        }
-        function activeConfSelect() {
-            document.getElementById("sel4").disabled = false;
-            document.getElementById("f3").submit();
-        }
-        function activeCheckConf() {
-            document.getElementById("f4").submit();
-        }
-        function activeCheckConf2() {
-            document.getElementById("f5").submit();
-        }
-        function activeButtons() {
-            document.getElementById("atc").disabled = false;
-        }
-        function activef5() {
-            document.getElementById("sel5").disabled = false;
-        }
-    </script>
+    <button onclick="goBack()"> Go Back</button>
 </div>
+
+<script>
+    function goBack() {
+        window.history.back()
+    }
+    function activeModelSelect() {
+        document.getElementById("sel2").disabled = false;
+        document.getElementById("f1").submit();
+    }
+    function activeNameSelect() {
+        document.getElementById("sel3").disabled = false;
+        document.getElementById("f2").submit();
+    }
+    function activeConfSelect() {
+        document.getElementById("sel4").disabled = false;
+        document.getElementById("f3").submit();
+    }
+    function activeCheckConf() {
+        document.getElementById("f4").submit();
+    }
+    function activeCheckConf2() {
+        document.getElementById("f5").submit();
+    }
+    function activeButtons() {
+        document.getElementById("atc").disabled = false;
+    }
+    function activef5() {
+        document.getElementById("sel5").disabled = false;
+    }
+</script>
 <footer class="mainFooter">
     <p>Copyright &copy; <span>Ethernot Team</span></p>
 </footer>
