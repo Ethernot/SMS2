@@ -20,18 +20,28 @@
         ?>
 
         <div class="mainContainer">
-            <form action="#" method="post">
+            <form action="saveSettings.php" method="post">
                 <label>Time of the backup</label>
-                <input type="time" name="time" >
+                <input type="time" name="time" value=<?php echo $currentHour . ':' . $currentMinutes ?>>
                 <br>
-                <label>Interval of the backup</label>
-                <select>
-
+                <label>Interval of the backup(Hours)</label>
+                <select name="interval">
+                    <?php
+                    for ($i = 1; $i < 97; $i++) {
+                        if ($i == $currentInterval) {
+                            echo '<option selected="selected" value=' . $i . '>' . $i . '</option>';
+                        } else {
+                            echo '<option value=' . $i . '>' . $i . '</option>';
+                        }
+                    }
+                    ?>
                 </select>
                 <br>
-                <input type="SUBMIT" value="Save">
-            </form>
+                <input type="submit" value="Save">
+            <br>
+            <a href="../index.php"><button>Go Home</button></a>
         </div>
+
         <footer class="mainFooter">
             <p>Copyright &copy; <span>Ethernot Team</span></p>
         </footer>

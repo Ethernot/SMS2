@@ -101,6 +101,11 @@ class Database
             }
         }
         fclose($file);
+
+        $file = fopen("../Server/configs.txt", "w") or die("Unable to open file!");
+        fwrite($file, $this->configsTime . "\n");
+        fwrite($file, $this->configsInterval . "\n");
+        fclose($file);
     }
 
     public function getModelByBrands($brand)
@@ -129,7 +134,7 @@ class Database
         array_push($this->enabledSwitchs, $newSwitch);
         $this->saveInfo();
         $date = date("Y-m-d") . ' ' . date("h:i:sa");
-        $this->saveToLogs("->> " . $date . " Added a new Switch with the name " . $name);
+        $this->saveToLogs($date . " Added a new Switch with the name " . $name);
     }
 
     public function disableSwitch($name)
@@ -143,7 +148,7 @@ class Database
         }
         $this->saveInfo();
         $date = date("Y-m-d") . ' ' . date("h:i:sa");
-        $this->saveToLogs("->> " . $date . " disabled Switch " . $name);
+        $this->saveToLogs($date . " disabled Switch " . $name);
     }
 
     public function enableSwitch($name)
@@ -158,7 +163,7 @@ class Database
         $this->saveInfo();
 
         $date = date("Y-m-d") . ' ' . date("h:i:sa");
-        $this->saveToLogs("->> " . $date . " enabled Switch " . $name);
+        $this->saveToLogs($date . " enabled Switch " . $name);
     }
 
     public function getSwitchInfo($name)
@@ -215,7 +220,7 @@ class Database
         }
 
         $date = date("Y-m-d") . ' ' . date("h:i:sa");
-        $this->saveToLogs("->> " . $date . " Changed detail from switch" . $oldName);
+        $this->saveToLogs($date . " Changed detail from switch" . $oldName);
 
         $this->saveInfo();
     }
@@ -240,7 +245,6 @@ class Database
     {
         if (!file_exists('../Logs/changeHistory.txt'))
             mkdir('../Logs', 0777, true);
-
         $file = fopen("../Logs/changeHistory.txt", "a") or die("Unable to open file!");
         fwrite($file, $info . "\n");
         fclose($file);
@@ -306,17 +310,22 @@ class Database
 
     public function getLogs()
     {
-        $logs = "";
+        $logs = array();
+        $final = "";
         if (file_exists("../Logs/changeHistory.txt")) {
             $file = fopen("../Logs/changeHistory.txt", "r") or die("Unable to open file!");
             while (!feof($file)) {
                 if ($file!="." && $file!="..") {
-                    $logs .= fgets($file);
+                    array_push($logs,fgets($file));
                 }
             }
             fclose($file);
         }
-        return $logs;
+        rsort($logs);
+        foreach($logs as $s){
+            $final .= $s . "\n";
+        }
+        return $final;
     }
 
     public function getConfs($name){
@@ -350,6 +359,19 @@ class Database
     public function getConfigsInterval()
     {
         return $this->configsInterval;
+    }
+
+    public function setConfigsInterval($configsInterval)
+    {
+        $this->configsInterval = $configsInterval;
+        $this->saveInfo();
+        $date = date("Y-m-d") . ' ' . date("h:i:sa");
+        $this->saveToLogs($date . " Changed settings of the server");
+    }
+
+    public function setConfigsTime($configsTime)
+    {
+        $this->configsTime = $configsTime;
     }
 
 

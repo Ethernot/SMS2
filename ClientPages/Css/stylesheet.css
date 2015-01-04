@@ -69,7 +69,7 @@ body {
 }
 
 .mainContainer {
-    float:left;
+    float: left;
     width: 40%;
     background-color: #DAFFCD;
     text-align: center;
@@ -105,17 +105,66 @@ select {
 }
 
 .logs {
-    float:left;
-    width: 70%;
-    text-align: center  ;
+    float: left;
     background-color: #DAFFCD;
-    font-family: mainFont;
-    font-size: 25px;
-    font-weight: bold;
     border-radius: 5px;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
     border: #005000 solid;
     margin: 2.5% 15%;
+    width: 70%;
 }
+
+.logs table {
+    border: solid;
+    border-collapse: collapse;
+    border-spacing: 0px;
+    padding: 0px;
+}
+
+.logs table td {
+    font-family: Calibri;
+    padding: 5px;
+    font-size: large;
+    border-left: 1px solid #808080;
+    border-right: 1px solid #808080;
+}
+
+.logs table td:first-child {
+    border-left: none;
+}
+
+.logs table td:last-child {
+    border-right: none;
+}
+
+.logs th {
+    font-family: Calibri;
+    font-weight: bold;
+    color: white;
+    background-color: #59BD09;
+    opacity: 0.8;
+    text-align: left;
+    height: 30px;
+    font-size: large;
+    padding: 5px;
+    border-left: 1px solid #808080;
+    border-right: 1px solid #808080;
+    border-bottom: 1px solid #808080;
+}
+
+.logs table th:first-child {
+    border-left: none;
+}
+
+.logs table th:last-child {
+    border-right: none;
+}
+
+.logs tr:nth-child(2n) {
+    background-color: #ECECD8;
+}
+
+
+
 
