@@ -27,9 +27,6 @@
             ?>
 
             <h1>Switch modified successfully!</h1>
-            <a href="../index.php">
-                <button>Go home</button>
-            </a>
 
         </div>
         <a href="../index.php" style="float: left;margin: 0 48% 1.5% 48%">

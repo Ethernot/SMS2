@@ -4,3 +4,5 @@
 2015-01-04 07:59:03pm enabled Switch 1234
 2015-01-04 07:59:04pm disabled Switch 1234
 2015-01-04 10:52:17pm Added a new Switch with the name sw1
+2015-01-04*22:58:25*Changed detail from switchsw1
+2015-01-04*23:00:59*enabled Switch 1234
