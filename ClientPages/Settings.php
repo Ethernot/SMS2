@@ -20,7 +20,6 @@
         ?>
 
         <div class="mainContainer">
-
             <form action="#" method="post">
                 <label>Time of the backup</label>
                 <input type="time" name="time" >

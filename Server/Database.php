@@ -73,8 +73,8 @@ class Database
                 $info .= fgets($file);
             }
             fclose($file);
-            $this->configsTime = explode("\n",s)[0];
-            $this->configsInterval = explode("\n",s)[1];
+            $this->configsTime = explode("\n",$info)[0];
+            $this->configsInterval = explode("\n",$info)[1];
         }
 
 
@@ -341,7 +341,6 @@ class Database
         }
         return $confInfo;
     }
-
 
     public function getConfigsTime()
     {
