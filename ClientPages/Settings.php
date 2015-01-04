@@ -20,11 +20,12 @@
         ?>
 
         <div class="mainContainer">
+            <h1>Settings:</h1>
             <form action="saveSettings.php" method="post">
-                <label>Time of the backup</label>
-                <input type="time" name="time" value=<?php echo $currentHour . ':' . $currentMinutes ?>>
+                <label>Time of the backup: </label>
+                <input class="time" type="time" name="time" value=<?php echo $currentHour . ':' . $currentMinutes ?>>
                 <br>
-                <label>Interval of the backup(Hours)</label>
+                <label>Interval of the backup(Hours): </label>
                 <select name="interval">
                     <?php
                     for ($i = 1; $i < 97; $i++) {
@@ -37,10 +38,12 @@
                     ?>
                 </select>
                 <br>
-                <input type="submit" value="Save">
-            <br>
-            <a href="../index.php"><button>Go Home</button></a>
+                <input class="submit" type="submit" value="Save">
+            </form>
         </div>
+        <a href="../index.php" style="float: left;margin: 0 48% 1.5% 48%">
+            <button><img src="Css/home-button.jpg" width="75" height="75"></button>
+        </a>
 
         <footer class="mainFooter">
             <p>Copyright &copy; <span>Ethernot Team</span></p>

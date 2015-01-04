@@ -1,0 +1,1 @@
+dell 5548p,DELL,PowerConnect 5548P,192.168.1.108,monitor,monitor,ssh

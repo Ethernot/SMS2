@@ -1,5 +1,5 @@
-2015-01-04 07:59:00pm disabled Switch 1234
-2015-01-04 07:59:01pm enabled Switch 1234
-2015-01-04 07:59:02pm disabled Switch 1234
-2015-01-04 07:59:03pm enabled Switch 1234
-2015-01-04 07:59:04pm disabled Switch 1234
+2015-01-04*20:02:07*enabled Switch 1234
+2015-01-04*20:02:08*disabled Switch 1234
+2015-01-04*20:09:00*Added a new Switch with the name dell 5548p
+2015-01-04*21:14:18*Changed settings of the server
+2015-01-04*21:14:35*Changed settings of the server

@@ -16,14 +16,12 @@
         $db = new Database();
         $db->setConfigsTime($time);
         $db->setConfigsInterval($interval);
-        echo $time;
-        echo "<br>".$interval;
         ?>
 
-        <br>
-        <a href="../index.php"><button>Go Home</button></a>
     </div>
-
+    <a href="../index.php" style="float: left;margin: 0 48% 1.5% 48%">
+        <button><img src="Css/home-button.jpg" width="75" height="75"></button>
+    </a>
     <footer class="mainFooter">
         <p>Copyright &copy; <span>Ethernot Team</span></p>
     </footer>

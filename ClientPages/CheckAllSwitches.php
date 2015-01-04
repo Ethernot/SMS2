@@ -1,69 +1,68 @@
 <!DOCTYPE html>
 <html>
-<head lang="en">
+    <head lang="en">
 
-    <meta charset="UTF-8">
-    <title>Switch Management Software</title>
-    <link rel="stylesheet" type="text/css" href="Css/stylesheet.css"/>
-</head>
-<body>
-<header class="mainHeader">
-    <span>S M S</span>
-    <span>**Switch Management Software**</span>
-</header>
+        <meta charset="UTF-8">
+        <title>Switch Management Software</title>
+        <link rel="stylesheet" type="text/css" href="Css/stylesheet.css"/>
+    </head>
+    <body>
+        <header class="mainHeader">
+            <span>S M S</span>
+            <span>**Switch Management Software**</span>
+        </header>
 
-<div class="mainContainer">
-    <?php
-    require_once("../Server/Database.php");
-    $db = new Database();
-    error_reporting(0);
-    $postedName = $_POST['name'];
-    $postedOption = $_POST['option'];
-    error_reporting(1);
-    if ($postedName != "" && $postedOption != "") {
-        if (strcmp($postedOption, "enable")==0) {
-            $db->enableSwitch($postedName);
-        } else if (strcmp($postedOption, "disable")==0) {
-            $db->disableSwitch($postedName);
-        }
-    }
-    $info = $db->getAllSwitchsNames();
-    $switchesNameList = explode(",", $info);
-    echo "<h1>Control Panel: all switches: </h1>";
-    $i = 0;
-    foreach ($switchesNameList as $a) {
-        if (strlen($a > 1)) {
-            echo "<form action='CheckAllSwitches.php' method='post' id='" . $i . "' >";
-            echo "<label >Switch name: " . $a . "</label><br>";
-            if ($db->isSwitchEnabled($a)) {
-                echo "<input type='hidden' name='name' value=" . $a . ">";
-                echo 'Enable <input type="radio" name="option" checked="true" value="enable" onchange="activeForm(' . $i . ')">';
-                echo 'Disabled <input type="radio" name="option" value="disable" onchange="activeForm(' . $i . ')">';
-            } else {
-                echo "<input type='hidden' name='name' value=" . $a . ">";
-                echo 'Enable <input type="radio" name="option" value="enable" onchange="activeForm(' . $i . ')">';
-                echo 'Disabled <input type="radio" name="option" checked="true" value="disable" onchange="activeForm(' . $i . ')">';
+        <div class="mainContainer">
+            <?php
+            require_once("../Server/Database.php");
+            $db = new Database();
+            error_reporting(0);
+            $postedName = $_POST['name'];
+            $postedOption = $_POST['option'];
+            error_reporting(1);
+            if ($postedName != "" && $postedOption != "") {
+                if (strcmp($postedOption, "enable") == 0) {
+                    $db->enableSwitch($postedName);
+                } else if (strcmp($postedOption, "disable") == 0) {
+                    $db->disableSwitch($postedName);
+                }
             }
-            $i++;
-        }
-        echo "</form>";
-    }
-    ?>
-    <br>
-    <a href="../index.php">
-        <button>Go Home</button>
-    </a>
-</div>
+            $info = $db->getAllSwitchsNames();
+            $switchesNameList = explode(",", $info);
+            echo "<h1>Control Panel: all switches: </h1>";
+            $i = 0;
+            foreach ($switchesNameList as $a) {
+                if (strlen($a > 1)) {
+                    echo "<form action='CheckAllSwitches.php' method='post' id='" . $i . "' >";
+                    echo "<label >Switch name: " . $a . "</label><br>";
+                    if ($db->isSwitchEnabled($a)) {
+                        echo "<input type='hidden' name='name' value=" . $a . ">";
+                        echo 'Enable <input type="radio" name="option" checked="true" value="enable" onchange="activeForm(' . $i . ')">';
+                        echo 'Disabled <input type="radio" name="option" value="disable" onchange="activeForm(' . $i . ')">';
+                    } else {
+                        echo "<input type='hidden' name='name' value=" . $a . ">";
+                        echo 'Enable <input type="radio" name="option" value="enable" onchange="activeForm(' . $i . ')">';
+                        echo 'Disabled <input type="radio" name="option" checked="true" value="disable" onchange="activeForm(' . $i . ')">';
+                    }
+                    $i++;
+                }
+                echo "</form>";
+            }
+            ?>
+        </div>
+        <a href="../index.php" style="float: left;margin: 0 48% 1.5% 48%">
+            <button><img src="Css/home-button.jpg" width="75" height="75"></button>
+        </a>
 
-<script>
-    function activeForm(form) {
+        <script>
+            function activeForm(form) {
 //        alert(form);
-        document.getElementById(form).submit();
-    }
-</script>
+                document.getElementById(form).submit();
+            }
+        </script>
 
-<footer class="mainFooter">
-    <p>Copyright &copy; <span>Ethernot Team</span></p>
-</footer>
-</body>
+        <footer class="mainFooter">
+            <p>Copyright &copy; <span>Ethernot Team</span></p>
+        </footer>
+    </body>
 </html>

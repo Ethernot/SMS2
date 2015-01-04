@@ -78,10 +78,11 @@
         echo "No switches inserted <br><br>";
     }
     ?>
-    <button onclick="goBack()"> Go Back</button>
 </div>
 
-
+    <a href="../index.php" style="float: left;margin: 0 48% 1.5% 48%">
+        <button><img src="Css/home-button.jpg" width="75" height="75"></button>
+    </a>
 
 <script language="javascript">
     function activeModelSelect() {
@@ -97,9 +98,6 @@
         var a = document.getElementById("pass").value;
         if(a!="")
             document.getElementById("as").disabled = false;
-    }
-    function goBack() {
-        window.history.back()
     }
 </script>
 <footer class="mainFooter">

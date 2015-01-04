@@ -1,5 +1,5 @@
 <?php
-
+date_default_timezone_set('Europe/London');
 /**
  * Created by IntelliJ IDEA.
  * User: Diogo
@@ -133,8 +133,9 @@ class Database
         $newSwitch = $name . ',' . $brandString . ',' . $modelString . ',' . $ip . ',' . $username . ',' . $password . ',' . $access;
         array_push($this->enabledSwitchs, $newSwitch);
         $this->saveInfo();
-        $date = date("Y-m-d") . ' ' . date("h:i:sa");
-        $this->saveToLogs($date . " Added a new Switch with the name " . $name);
+        $date = date("Y-m-d") . '*' . date("H:i:sa");
+        $date = str_replace("pm","",$date);
+        $this->saveToLogs($date . "*Added a new Switch with the name " . $name);
     }
 
     public function disableSwitch($name)
@@ -147,8 +148,9 @@ class Database
             }
         }
         $this->saveInfo();
-        $date = date("Y-m-d") . ' ' . date("h:i:sa");
-        $this->saveToLogs($date . " disabled Switch " . $name);
+        $date = date("Y-m-d") . '*' . date("H:i:sa");
+        $date = str_replace("pm","",$date);
+        $this->saveToLogs($date . "*disabled Switch " . $name);
     }
 
     public function enableSwitch($name)
@@ -162,8 +164,9 @@ class Database
         }
         $this->saveInfo();
 
-        $date = date("Y-m-d") . ' ' . date("h:i:sa");
-        $this->saveToLogs($date . " enabled Switch " . $name);
+        $date = date("Y-m-d") . '*' . date("H:i:sa");
+        $date = str_replace("pm","",$date);
+        $this->saveToLogs($date . "*enabled Switch " . $name);
     }
 
     public function getSwitchInfo($name)
@@ -219,8 +222,9 @@ class Database
             $this->renameFolders($oldName, $name);
         }
 
-        $date = date("Y-m-d") . ' ' . date("h:i:sa");
-        $this->saveToLogs($date . " Changed detail from switch" . $oldName);
+        $date = date("Y-m-d") . '*' . date("H:i:sa");
+        $date = str_replace("pm","",$date);
+        $this->saveToLogs($date . "*Changed detail from switch" . $oldName);
 
         $this->saveInfo();
     }
@@ -365,8 +369,9 @@ class Database
     {
         $this->configsInterval = $configsInterval;
         $this->saveInfo();
-        $date = date("Y-m-d") . ' ' . date("h:i:sa");
-        $this->saveToLogs($date . " Changed settings of the server");
+        $date = date("Y-m-d") . '*' . date("H:i:sa");
+        $date = str_replace("pm","",$date);
+        $this->saveToLogs($date . "*Changed settings of the server");
     }
 
     public function setConfigsTime($configsTime)
