@@ -13,7 +13,8 @@ class Database
     public $enabledSwitchs;
     public $disabledSwitchs;
     public $configsInterval;
-    public $configsTime;
+    public $nextUpdate;
+    public $lastUpdate;
 
 
     function __construct()
@@ -74,8 +75,9 @@ class Database
                 $info .= fgets($file);
             }
             fclose($file);
-            $this->configsTime = explode("\n", $info)[0];
-            $this->configsInterval = explode("\n", $info)[1];
+            $this->lastUpdate = explode("\n", $info)[0];
+            $this->nextUpdate = explode("\n", $info)[1];
+            $this->configsInterval = explode("\n", $info)[2];
         }
 
 
@@ -103,7 +105,8 @@ class Database
         fclose($file);
 
         $file = fopen("../Server/configs.txt", "w") or die("Unable to open file!");
-        fwrite($file, $this->configsTime . "\n");
+        fwrite($file, $this->lastUpdate . "\n");
+        fwrite($file, $this->nextUpdate . "\n");
         fwrite($file, $this->configsInterval . "\n");
         fclose($file);
     }
@@ -400,9 +403,24 @@ class Database
         return $confInfo;
     }
 
-    public function getConfigsTime()
+    public function getLastUpdate()
     {
-        return $this->configsTime;
+        return $this->lastUpdate;
+    }
+
+    public function setLastUpdate($lastUpdate)
+    {
+        $this->lastUpdate = $lastUpdate;
+    }
+
+    public function getNextUpdate()
+    {
+        return $this->nextUpdate;
+    }
+
+    public function setNextUpdate($nextUpdate)
+    {
+        $this->nextUpdate = $nextUpdate;
     }
 
     public function getConfigsInterval()
@@ -413,16 +431,9 @@ class Database
     public function setConfigsInterval($configsInterval)
     {
         $this->configsInterval = $configsInterval;
-        $this->saveInfo();
-        $date = date("Y-m-d") . '*' . date("H:i:sa");
-        $date = str_replace("pm", "", $date);
-        $this->saveToLogs($date . "*Changed settings of the server");
     }
 
-    public function setConfigsTime($configsTime)
-    {
-        $this->configsTime = $configsTime;
-    }
+
 
 
 }
