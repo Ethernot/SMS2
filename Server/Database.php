@@ -1,5 +1,6 @@
 <?php
 date_default_timezone_set('Europe/London');
+
 /**
  * Created by IntelliJ IDEA.
  * User: Diogo
@@ -73,10 +74,9 @@ class Database
                 $info .= fgets($file);
             }
             fclose($file);
-            $this->configsTime = explode("\n",$info)[0];
-            $this->configsInterval = explode("\n",$info)[1];
+            $this->configsTime = explode("\n", $info)[0];
+            $this->configsInterval = explode("\n", $info)[1];
         }
-
 
 
     }
@@ -134,7 +134,7 @@ class Database
         array_push($this->enabledSwitchs, $newSwitch);
         $this->saveInfo();
         $date = date("Y-m-d") . '*' . date("H:i:sa");
-        $date = str_replace("pm","",$date);
+        $date = str_replace("pm", "", $date);
         $this->saveToLogs($date . "*Added a new Switch with the name " . $name);
     }
 
@@ -149,7 +149,7 @@ class Database
         }
         $this->saveInfo();
         $date = date("Y-m-d") . '*' . date("H:i:sa");
-        $date = str_replace("pm","",$date);
+        $date = str_replace("pm", "", $date);
         $this->saveToLogs($date . "*disabled Switch " . $name);
     }
 
@@ -165,7 +165,7 @@ class Database
         $this->saveInfo();
 
         $date = date("Y-m-d") . '*' . date("H:i:sa");
-        $date = str_replace("pm","",$date);
+        $date = str_replace("pm", "", $date);
         $this->saveToLogs($date . "*enabled Switch " . $name);
     }
 
@@ -183,9 +183,9 @@ class Database
         }
     }
 
-    public function getSwitchInfoByInt($brand,$model,$name)
+    public function getSwitchInfoByInt($brand, $model, $name)
     {
-         $aux=explode(",",$this->getEnabledNamesByModelsAndBrand($brand,$model))[$name-1];
+        $aux = explode(",", $this->getEnabledNamesByModelsAndBrand($brand, $model))[$name - 1];
         return $this->getSwitchInfo($aux);
     }
 
@@ -223,7 +223,7 @@ class Database
         }
 
         $date = date("Y-m-d") . '*' . date("H:i:sa");
-        $date = str_replace("pm","",$date);
+        $date = str_replace("pm", "", $date);
         $this->saveToLogs($date . "*Changed detail from switch" . $oldName);
 
         $this->saveInfo();
@@ -271,13 +271,29 @@ class Database
     public function getPwSha1($encpw)
     {
         $file = fopen("../Data/passwords.txt", "r") or die("Unable to open file!");
-        echo "-> ".$file;
-        foreach(explode("\n",$file) as $i){
-            if(strcmp(explode(",",$i)[1],$encpw)==0)
-                return explode(",",$i)[0];
+        $info = fgets($file);
+        foreach (explode("\n", $info) as $i) {
+            if (explode(",", $i)[1] != "") {
+                if (explode(",", $i)[1] == $encpw)
+                    return explode(",", $i)[0];
+            }
         }
         fclose($file);
         return null;
+    }
+    public function deletePassword($pass)
+    {
+        $file = fopen("../Data/passwords.txt", "r") or die("Unable to open file!");
+        $info = fgets($file);
+        fclose($file);
+        $file = fopen("../Data/passwords.txt", "w") or die("Unable to open file!");
+        foreach (explode("\n", $info) as $i) {
+            if (explode(",", $i)[0] != "") {
+                if (explode(",", $i)[1] != $pass)
+                    fwrite($file,$i."\n");
+            }
+        }
+        fclose($file);
     }
 
 //    ------------PASSWORDS
@@ -317,7 +333,7 @@ class Database
     {
         $finalList = "";
         $modelList = $this->getModelByBrands($brand);
-        $modelList = explode(",",$modelList);
+        $modelList = explode(",", $modelList);
         foreach ($modelList as $model) {
             foreach ($this->enabledSwitchs as $switch) {
                 if (explode(",", $switch)[2] == str_replace(array("\n", "\r"), '', $model)) {
@@ -346,34 +362,36 @@ class Database
         if (file_exists("../Logs/changeHistory.txt")) {
             $file = fopen("../Logs/changeHistory.txt", "r") or die("Unable to open file!");
             while (!feof($file)) {
-                if ($file!="." && $file!="..") {
-                    array_push($logs,fgets($file));
+                if ($file != "." && $file != "..") {
+                    array_push($logs, fgets($file));
                 }
             }
             fclose($file);
         }
         rsort($logs);
-        foreach($logs as $s){
+        foreach ($logs as $s) {
             $final .= $s . "\n";
         }
         return $final;
     }
 
-    public function getConfs($name){
+    public function getConfs($name)
+    {
         $confsList = "";
-        $dir = opendir("../Configs/".$name);
-        while(($file = readdir($dir)) != false){
-            if ($file!="." && $file!="..") {
+        $dir = opendir("../Configs/" . $name);
+        while (($file = readdir($dir)) != false) {
+            if ($file != "." && $file != "..") {
                 $confsList .= str_replace(".txt", "", $file) . ",";
             }
         }
         return $confsList;
     }
 
-    public function getConfigInfo($name, $config){
+    public function getConfigInfo($name, $config)
+    {
         $confInfo = "";
-        if (file_exists("../Configs/".$name."/".$config.".txt")) {
-            $file = fopen("../Configs/".$name."/".$config.".txt", "r") or die("Unable to open file!");
+        if (file_exists("../Configs/" . $name . "/" . $config . ".txt")) {
+            $file = fopen("../Configs/" . $name . "/" . $config . ".txt", "r") or die("Unable to open file!");
             while (!feof($file)) {
                 $confInfo .= fgets($file);
             }
@@ -397,7 +415,7 @@ class Database
         $this->configsInterval = $configsInterval;
         $this->saveInfo();
         $date = date("Y-m-d") . '*' . date("H:i:sa");
-        $date = str_replace("pm","",$date);
+        $date = str_replace("pm", "", $date);
         $this->saveToLogs($date . "*Changed settings of the server");
     }
 

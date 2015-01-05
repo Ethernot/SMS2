@@ -21,9 +21,13 @@
             $newAccess = $_POST['newAccess'];
             $newUser = $_POST['newUser'];
             $newPassWord = $_POST['newPassWord'];
+            $oldPassWord = $_POST['oldPassWord'];
             require_once("../Server/Database.php");
+            $passWordFinal = sha1($newPassWord);
             $db = new Database();
-            $db->modifySwitchInfo($oldName, $newBrand, $newModel, $newName, $newIp, $newAccess, $newUser, $newPassWord);
+            $db->deletePassword($oldPassWord);
+            $db->savePassword($newPassWord,$passWordFinal);
+            $db->modifySwitchInfo($oldName, $newBrand, $newModel, $newName, $newIp, $newAccess, $newUser, $passWordFinal);
             ?>
 
             <h1>Switch modified successfully!</h1>

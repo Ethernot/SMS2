@@ -1,8 +1,66 @@
-2015-01-04 07:59:00pm disabled Switch 1234
-2015-01-04 07:59:01pm enabled Switch 1234
-2015-01-04 07:59:02pm disabled Switch 1234
-2015-01-04 07:59:03pm enabled Switch 1234
-2015-01-04 07:59:04pm disabled Switch 1234
-2015-01-04 10:52:17pm Added a new Switch with the name sw1
 2015-01-04*22:58:25*Changed detail from switchsw1
 2015-01-04*23:00:59*enabled Switch 1234
+2015-01-04*23:02:31*disabled Switch 1234
+2015-01-04*23:02:34*enabled Switch 1234
+2015-01-05*00:25:13*Added a new Switch with the name sw1
+2015-01-05*00:46:00*Added a new Switch with the name sw2
+2015-01-05*01:54:01am*disabled Switch sw1
+2015-01-05*01:54:15am*disabled Switch sw2
+2015-01-05*01:54:27am*enabled Switch sw1
+2015-01-05*01:54:37am*enabled Switch sw2
+2015-01-05*01:54:41am*disabled Switch sw1
+2015-01-05*01:55:45am*disabled Switch sw1
+2015-01-05*01:55:49am*disabled Switch sw2
+2015-01-05*01:56:12am*disabled Switch sw2
+2015-01-05*01:56:19am*enabled Switch sw1
+2015-01-05*01:56:21am*enabled Switch sw2
+2015-01-05*01:56:25am*disabled Switch sw1
+2015-01-05*01:58:04am*disabled Switch sw1
+2015-01-05*01:58:10am*enabled Switch sw1
+2015-01-05*01:58:23am*enabled Switch sw1
+2015-01-05*01:58:26am*disabled Switch sw1
+2015-01-05*01:58:29am*disabled Switch sw2
+2015-01-05*01:58:30am*enabled Switch sw1
+2015-01-05*01:58:32am*enabled Switch sw2
+2015-01-05*01:58:35am*disabled Switch sw1
+2015-01-05*01:58:39am*disabled Switch sw2
+2015-01-05*01:58:41am*enabled Switch sw1
+2015-01-05*01:58:43am*enabled Switch sw2
+2015-01-05*01:58:44am*disabled Switch sw1
+2015-01-05*01:58:49am*disabled Switch sw2
+2015-01-05*01:58:50am*enabled Switch sw1
+2015-01-05*02:00:40am*Changed detail from switchsw1
+2015-01-05*02:03:36am*disabled Switch sw1
+2015-01-05*02:03:42am*enabled Switch sw1
+2015-01-05*02:03:46am*enabled Switch sw2
+2015-01-05*02:05:03am*disabled Switch sw1
+2015-01-05*02:05:13am*disabled Switch sw2
+2015-01-05*02:05:19am*enabled Switch sw1
+2015-01-05*02:05:20am*enabled Switch sw2
+2015-01-05*02:07:21am*Added a new Switch with the name tttt
+2015-01-05*02:07:46am*Added a new Switch with the name tttt2
+2015-01-05*02:07:53am*disabled Switch tttt
+2015-01-05*02:07:59am*disabled Switch tttt2
+2015-01-05*02:08:04am*enabled Switch tttt2
+2015-01-05*02:08:11am*enabled Switch tttt
+2015-01-05*02:08:12am*disabled Switch tttt2
+2015-01-05*02:08:28am*enabled Switch tttt2
+2015-01-05*02:16:08am*Changed detail from switchtttt
+2015-01-05*02:20:01am*Added a new Switch with the name 111
+2015-01-05*02:21:02am*Changed detail from switch111
+2015-01-05*02:23:11am*Changed detail from switch111
+2015-01-05*02:24:52am*Added a new Switch with the name 1111
+2015-01-05*02:25:30am*Changed detail from switch1111
+2015-01-05*02:26:56am*Added a new Switch with the name hfjhhj
+2015-01-05*02:30:36am*Changed detail from switchhfjhhj
+2015-01-05*02:32:06am*Added a new Switch with the name thghjy
+2015-01-05*02:32:27am*Changed detail from switchthghjy
+2015-01-05*02:33:15am*Added a new Switch with the name adf
+2015-01-05*02:33:26am*Changed detail from switchadf
+2015-01-05*02:34:09am*Added a new Switch with the name sd
+2015-01-05*02:34:24am*Changed detail from switchsd
+2015-01-05*02:34:40am*Changed detail from switchsd
+2015-01-05*02:34:55am*Added a new Switch with the name df
+2015-01-05*02:36:38am*Changed detail from switchsd
+2015-01-05*02:38:01am*Added a new Switch with the name asdf
+2015-01-05*02:38:47am*Changed detail from switchasdf

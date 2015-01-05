@@ -2,10 +2,11 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
+
     <title>Switch Management Software</title>
     <link rel="stylesheet" type="text/css" href="Css/stylesheet.css"/>
 </head>
-<body>
+<body   >
 <header class="mainHeader">
     <span>S M S</span>
     <span>**Switch Management Software**</span>
@@ -46,6 +47,7 @@
         echo "<label> Model: </label>";
         if ($brandSelected > 0) {
             $switchesModelList = explode(",", $db->getEnabledModelsByBrand($switchesBrandList[$brandSelected-1]));
+            $switchesModelList=array_unique($switchesModelList);
             echo '<select name="model" id="sel2" oninput="activeNameSelect()">';
         } else {
             echo '<select name="model" id="sel2" disabled="true" oninput="activeNameSelect()">';
@@ -85,7 +87,11 @@
         }
         echo '</select>';
         echo "<br>";
-        echo "<input type='submit' value='Check Switch' id='cs' disabled='true'>";
+        if($modelSelected>0){
+            echo "<input type='submit' value='Check Switch' id='cs' >";
+        }else{
+            echo "<input type='submit' value='Check Switch' id='cs' disabled='true'>";
+        }
         echo "</form>";
     } else {
         echo "<label>No switches available</label><br>";
