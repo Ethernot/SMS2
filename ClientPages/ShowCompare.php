@@ -10,7 +10,7 @@
             <span>S M S</span>
             <span>**Switch Management Software**</span>
         </header>
-        <div class='mainContainer'>
+        <div class='compareContainer'>
             <?php
             error_reporting(0);
             $name = $_POST['name'];
@@ -30,7 +30,7 @@
             } else if ($conf1 != "" && $conf2 != "") {
                 $config1 = $db->getConfigInfo($name, $conf1);
                 $config2 = $db->getConfigInfo($name, $conf2);
-                echo "<div>";
+                echo "<div style='float: left;width: 47%;margin-left: 2.5%;border-right: solid #000000'>";
                 echo "<h2>Configuration " . $conf1 . ":</h2>";
 
                 for ($i = 0; $i < strlen($config1); $i++) {
@@ -45,9 +45,9 @@
                 echo "<br><a href='../Configs/" . $name . "/" . $conf1 . ".txt' download><button>Download configuration</button></a>";
                 echo "</div>";
 
-                echo "<div>";
+                echo "<div style='float: right;width: 47%;margin-right: 2.5%'>";
                 echo "<h2>Configuration " . $conf2 . ":</h2>";
-//        echo $config2;
+
                 for ($i = 0; $i < strlen($config2); $i++) {
                     if ($i >= strlen($config1)) {
                         echo '<font color=#ff0000 size="4">' . $config2[$i] . '</font>';

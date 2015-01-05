@@ -88,9 +88,9 @@
         echo '</select>';
         echo "<br>";
         if($modelSelected>0){
-            echo "<input type='submit' value='Check Switch' id='cs' >";
+            echo "<input class='submit' type='submit' value='Check Switch' id='cs' >";
         }else{
-            echo "<input type='submit' value='Check Switch' id='cs' disabled='true'>";
+            echo "<input class='submit' type='submit' value='Check Switch' id='cs' disabled='true'>";
         }
         echo "</form>";
     } else {

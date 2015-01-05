@@ -113,8 +113,23 @@ body {
 
 .mainContainer ul li a:hover {
     text-decoration: none;
-    background-color: #000;
-    color: #F3FAFF;
+    background-color: #2B2B2B;
+    color: #94DBFF;
+}
+
+.compareContainer {
+    color: #5E8AA0;
+    float: left;
+    width: 100%;
+    background-color: #F3FAFF;
+    text-align: center;
+    font-family: mainFont;
+    font-size: 25px;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border: #000 solid;
+    margin: 2.5% 0 1% 0;
 }
 
 .logs {
