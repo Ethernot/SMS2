@@ -14,10 +14,20 @@
     <?php
     echo "<h1> Modify Switch Details: </h1>";
     error_reporting(0);
-    $brandSelected = $_POST['brand'];
-    $modelSelected = $_POST['model'];
+    if (isset($_POST['brand'])) {
+        $brandSelected = $_POST['brand'];
+    } else {
+        $brandSelected = -1;
+    }
+    if (isset($_POST['model'])) {
+        $modelSelected = $_POST['model'];
+    } else {
+        $modelSelected = -1;
+    }
     $actualInfo = $_POST['info'];
     error_reporting(1);
+    $oldInfo = $actualInfo;
+    $actualInfo = str_replace("*", " ", $actualInfo);
     $actualInfoArray = explode(",", $actualInfo);
 
     //--------------
@@ -25,15 +35,14 @@
     $db = new Database();
     $switchesBrandList = explode("\n", $db->getBrands());
     echo '<form id="f1" action="ModifySwitch.php" method="post">';
-    echo "<input type='hidden' name='info' value=" . $actualInfo . ">";
+    echo '<input type="hidden" name="info" value=' . $oldInfo . '>';
     echo "<label> Brand: </label>";
-    echo '<select name="brand" id="sel1" oninput="activeModelSelect()">';
-    echo '<option disabled="disabled" selected="selected">Please select a brand</option>';
+    echo '<select name="brand" required="true" id="sel1" oninput="activeModelSelect()">';
     $i = 1;
     foreach ($switchesBrandList as $a) {
         if (strlen($a) > 0) {
-            if ($brandSelected == $i) {
-                echo '<option selected="selected" disabled="disabled" value=' . $i++ . '>' . $a . '</option>';
+            if ($brandSelected == $i || ($actualInfoArray[1] == $a && $brandSelected == -1)) {
+                echo '<option selected="selected" value=' . $i++ . '>' . $a . '</option>';
             } else {
                 echo '<option value=' . $i++ . '>' . $a . '</option>';
             }
@@ -42,30 +51,30 @@
     echo '</select>';
     echo "<br>";
     echo "</form>";
-
-    if ($brandSelected > 0) {
+    if ($brandSelected == -1) {
+        $infoModels = $db->getModelByBrands($actualInfoArray[1]);
+    }else{
         $infoModels = $db->getModelByBrands($switchesBrandList[$brandSelected - 1]);
-        $switchesModelList = explode(",", $infoModels);
     }
+    $switchesModelList = explode(",", $infoModels);
     echo '<form id="f2" action="ModifySwitch.php" method="post" >';
     echo '<input type="hidden" name="brand" value="' . $brandSelected . '">';
-    echo "<input type='hidden' name='info' value=" . $actualInfo . ">";
+    echo "<input type='hidden' name='info' value=" . $oldInfo . ">";
     echo "<label> Model: </label>";
-    if ($brandSelected == 0) {
-        echo '<select name="model" id="sel2" disabled="true" required="required" oninput="activeButtons()">';
-    } else {
-        echo '<select name="model" id="sel2" required="required" oninput="activeButtons()">';
-    }
-    echo '<option disabled="disabled" selected="selected" >Please select a model</option>';
+    echo $modelSelected;
+    echo '<select name="model" id="sel2" required="true" oninput="activeButtons()">';
+    echo '<option disabled="disabled">Please select a model</option>';
     $i = 1;
     foreach ($switchesModelList as $a) {
-            echo "modelSelected:".$modelSelected."<br>";
-            echo "i: ".$i."<br>";
+        if(ord($a[0])==13){
+            $a=substr($a,1,strlen($a));
+        }
         if (strlen($a) > 1) {
-            if ($modelSelected == $i) {
+                echo "<option>sgdf: ".strcmp($actualInfoArray[2],$a)."</option>";
+            if ($modelSelected == $i || ($actualInfoArray[2] == $a && $modelSelected == -1)) {
                 echo '<option selected="selected" value=' . $i++ . '>' . $a . '</option>';
             } else {
-                echo '<option value=' . $i++ . '>' . $a . '</option>';
+                echo '<option value=' . $i++ . '>|' . $a . '|</option>';
             }
         }
     }
@@ -76,8 +85,18 @@
     echo "<form action='ModifySwitchFinal.php' method='post' name='ff'>";
     echo "<input type='hidden' name='oldName' value=" . $actualInfoArray[0] . ">";
     $auxNewBrand = str_replace(" ", "*", $switchesBrandList[$brandSelected - 1]);
-    echo "<input type='hidden' name='newBrand' value=" . $auxNewBrand . ">";
+    if ($auxNewBrand == "") {
+        $auxNewBrand = $actualInfoArray[1];
+    }
+//    echo "|" . $auxNewBrand . "|<br>";
+
     $auxNewModel = str_replace(" ", "*", $switchesModelList[$modelSelected - 1]);
+    if ($auxNewModel == "") {
+        $auxNewModel = $actualInfoArray[2];
+    }
+//    echo "|" . $auxNewModel . "|<br>";
+
+    echo "<input type='hidden' name='newBrand' value=" . $auxNewBrand . ">";
     echo "<input type='hidden' name='newModel' value=" . $auxNewModel . ">";
 
     $switchesNameList = explode(",", $db->getAllSwitchsNames());
@@ -90,7 +109,7 @@
         }
     }
     echo '<br><label>Name: </label><input type="text" name="newName" id="nm" value=' . $actualInfoArray[0] . ' required="true" onchange=checkName("' . $aux . '")><br>';
-    echo "<label>IP: </label> <input type='text' name='newIp' value=" . $actualInfoArray[3] . "> <br>";
+    echo "<label>IP: </label> <input type='text' name='newIp' required='true' value=" . $actualInfoArray[3] . "> <br>";
     echo "<label>Access by:</label>";
     if (strcmp($actualInfoArray[6], "ssh") == 0) {
         echo '<br> <input type="radio" name="newAccess" value="ssh" checked="true"> SSH ';
@@ -99,10 +118,10 @@
         echo '<br> <input type="radio" name="newAccess" value="ssh"> SSH ';
         echo '<br> <input type="radio" name="newAccess" value="telnet" checked="true"> Telnet <br>';
     }
-    echo "<label>user: </label> <input type='text' name='newUser' value=" . $actualInfoArray[4] . "> <br>";
-    echo "<label>Password: </label> <input type='password' name='newPassWord' value=" . $db->getPwSha1($actualInfoArray[5]) . "> <br>";
-    echo "<input type='hidden' name='oldPassWord' value=".$actualInfoArray[5].">";
-    echo "<input type='submit' value='Save Changes'>";
+    echo "<label>user: </label> <input type='text' name='newUser' required='true' value=" . $actualInfoArray[4] . "> <br>";
+    echo "<label>Password: </label> <input type='password' required='true' name='newPassWord' value=" . $db->getPwSha1($actualInfoArray[5]) . "> <br>";
+    echo "<input type='hidden' name='oldPassWord' value=" . $actualInfoArray[5] . ">";
+    echo "<input class='submit' type='submit' name='sc' value='Save Changes'>";
     echo "</form>"
     ?>
 
@@ -136,6 +155,8 @@
             document.getElementById("f1").submit();
         }
         function activeButtons() {
+//            alert("sdfds");
+//            document.getElementById("sc").disabled = false;
             document.getElementById("f2").submit();
         }
         function goBack() {

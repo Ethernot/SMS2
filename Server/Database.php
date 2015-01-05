@@ -210,7 +210,7 @@ class Database
 
     public function modifySwitchInfo($oldName, $brand, $model, $name, $ip, $access, $username, $password)
     {
-        $newInfo = $name . ',' . $brand . ',' . $model . ',' . $ip . ',' . $username . ',' . $password . ',' . $access . "/";
+        $newInfo = $name . ',' . $brand . ',' . $model . ',' . $ip . ',' . $username . ',' . $password . ',' . $access;
         $oldInfo = $this->getSwitchInfo($oldName);
         unset($this->enabledSwitchs[array_search($oldInfo, $this->enabledSwitchs)]);
         $this->enabledSwitchs = array_values($this->enabledSwitchs);
@@ -271,20 +271,26 @@ class Database
     public function getPwSha1($encpw)
     {
         $file = fopen("../Data/passwords.txt", "r") or die("Unable to open file!");
-        $info = fgets($file);
+        $info = "";
+        while (!feof($file)) {
+            $info.= fgets($file);
+        }
+        fclose($file);
         foreach (explode("\n", $info) as $i) {
             if (explode(",", $i)[1] != "") {
                 if (explode(",", $i)[1] == $encpw)
                     return explode(",", $i)[0];
             }
         }
-        fclose($file);
-        return null;
+        return "merda";
     }
     public function deletePassword($pass)
     {
         $file = fopen("../Data/passwords.txt", "r") or die("Unable to open file!");
-        $info = fgets($file);
+        $info = "";
+        while (!feof($file)) {
+            $info.= fgets($file);
+        }
         fclose($file);
         $file = fopen("../Data/passwords.txt", "w") or die("Unable to open file!");
         foreach (explode("\n", $info) as $i) {

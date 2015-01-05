@@ -22,7 +22,7 @@
     $db=new Database();
     if(strcmp($access[0],'s')==0){
         require_once("../Server/ssh.php");
-        $ok=shhswitch($ip,$username,$db->getPwSha1($password),$name,1);
+        $ok=sshswitch($ip,$username,$db->getPwSha1($password),$name,1);
         if($ok){
             echo "<h1>Backup sucessfully!</h1>";
         }else{

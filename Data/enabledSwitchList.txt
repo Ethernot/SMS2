@@ -1,3 +1,1 @@
-df,3Com,SuperStack 3,sdf,ssdfsfd,011c945f30ce2cbafc452f39840f025693339c42,ssh
-sd,DELL,PowerConnect 5548P,asd,asdasd,78c0f1ad029ce0ddb24d4048f6f9d7e924682eea,telnet/
-asdf,,,sdfd,sdfsdf,00a7fe0ed0ae0bacc4a29a0fd20e5b243a363c95,ssh/
+name,3Com,Switch 5500G,ip,user,9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684,ssh
