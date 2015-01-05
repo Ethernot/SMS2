@@ -19,10 +19,10 @@
     require_once("../Server/Database.php");
     $db = new Database();
     $info = $db->getBrands();
-    $switchesBrandList=explode("\n",$info);
-    error_reporting (0);
-    $brandSelected=$_POST['brand'];
-    error_reporting (1);
+    $switchesBrandList = explode("\n", $info);
+    error_reporting(0);
+    $brandSelected = $_POST['brand'];
+    error_reporting(1);
 
     if (count($switchesBrandList) > 0) {
         echo '<form id="f1" action="AddSwitch.php" method="post">';
@@ -30,12 +30,12 @@
         echo '<select name="brand" id="sel1" oninput="activeModelSelect()">';
         //<!--todo:  alterar o tipo de letra dos selects-->
         echo '<option disabled="disabled" selected="selected">Please select a brand</option>';
-        $i=1;
+        $i = 1;
         foreach ($switchesBrandList as $a) {
             if (strlen($a) > 0) {
-                if($brandSelected==$i){
+                if ($brandSelected == $i) {
                     echo '<option selected="selected" value=' . $i++ . '>' . $a . '</option>';
-                }else{
+                } else {
                     echo '<option value=' . $i++ . '>' . $a . '</option>';
                 }
             }
@@ -44,29 +44,29 @@
         echo "<br>";
         echo "<span id='teste'> </span>";
         echo "</form>";
-        if($brandSelected>0){
-            $infoModels=$db->getModelByBrands($switchesBrandList[$brandSelected-1]);
-            $switchesModelList=explode(",",$infoModels);
+        if ($brandSelected > 0) {
+            $infoModels = $db->getModelByBrands($switchesBrandList[$brandSelected - 1]);
+            $switchesModelList = explode(",", $infoModels);
         }
         echo '<form action="AddSwitchFinal.php" method="post">';
-        echo '<input type="hidden" name="brand" value="'.$brandSelected.'">';
+        echo '<input type="hidden" name="brand" value="' . $brandSelected . '">';
         echo "<label> Model: </label>";
-        if($brandSelected==0) {
+        if ($brandSelected == 0) {
             echo '<select name="model" id="sel2" disabled="true" required="required" onclick="activeButtons2()">';
-        }else{
+        } else {
             echo '<select name="model" id="sel2" required="required" onclick="activeButtons2()">';
         }
         echo '<option disabled="disabled" selected="selected" >Please select a model</option>';
-        $i=1;
+        $i = 1;
         foreach ($switchesModelList as $a) {
             if (strlen($a) > 1) {
                 echo '<option value=' . $i++ . '>' . $a . '</option>';
             }
         }
         echo '</select>';
+        $aux = $db->getAllSwitchsNames();
         $switchesNameList = explode(",", $db->getAllSwitchsNames());
-
-        echo '<br><label>Name: </label><input type="text" name="name" required="true">';
+        echo '<br><label>Name: </label><input type="text" name="name" id="nm" required="true" onchange=checkName("' . $aux . '")>';
         echo '<br><label>IP: </label><input type="text" name="ip" required="true">';
         echo '<br><label>Accessed by: </label> <br>';
         echo '<input type="radio" name="access" value="ssh" checked="true"> SSH <br>';
@@ -74,7 +74,7 @@
         echo '<label>Username: </label><input type="text" name="username" required="true">';
         echo '<br><label>Password: </label><input type="password" name="password" id="pass" required="true" oninput="activeButtons()">';
         echo "<br>";
-        echo "<input class='submit' type='submit' value='Add switch' id='as' disabled='true'>";
+        echo "<input type='submit' value='Add switch' id='as' disabled='true'>";
         echo "</form>";
     } else {
         echo "No switches inserted <br><br>";
@@ -82,23 +82,47 @@
     ?>
 </div>
 
-    <a href="../index.php" style="float: left;margin: 0 48% 1.5% 48%">
-        <button class="home"><img src="Css/home.png" width="75" height="75"></button>
-    </a>
+<a href="../index.php" style="float: left;margin: 0 48% 1.5% 48%">
+    <button><img src="Css/home-button.jpg" width="75" height="75"></button>
+</a>
 
 <script language="javascript">
+    function checkName(allNames) {
+        var actualName = document.getElementById("nm").value;
+        var namesArray = allNames.split(",");
+        if (contains(namesArray,actualName)) {
+            document.getElementById("nm").style.background = 'red';
+            alert("Name already exists, try again!");
+            document.getElementById("nm").value = "";
+        }
+        else {
+            document.getElementById("nm").style.background = 'white';
+        }
+
+
+    }
+    function contains(a, obj) {
+        var i = a.length;
+        while (i--) {
+            if (a[i] === obj) {
+                return true;
+            }
+        }
+        return false;
+    }
     function activeModelSelect() {
         document.getElementById("sel2").disabled = false;
         document.getElementById("f1").submit();
     }
     function activeButtons() {
+
         var a = document.getElementById("sel2").value;
-        if(a!="Please select a model")
+        if (a != "Please select a model")
             document.getElementById("as").disabled = false;
     }
     function activeButtons2() {
         var a = document.getElementById("pass").value;
-        if(a!="")
+        if (a != "")
             document.getElementById("as").disabled = false;
     }
 </script>

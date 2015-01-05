@@ -12,55 +12,56 @@
             <span>**Switch Management Software**</span>
         </header>
 
-        <div class="mainContainer">
-            <?php
-            require_once("../Server/Database.php");
-            $db = new Database();
-            error_reporting(0);
-            $postedName = $_POST['name'];
-            $postedOption = $_POST['option'];
-            error_reporting(1);
-            if ($postedName != "" && $postedOption != "") {
-                if (strcmp($postedOption, "enable") == 0) {
-                    $db->enableSwitch($postedName);
-                } else if (strcmp($postedOption, "disable") == 0) {
-                    $db->disableSwitch($postedName);
-                }
+<div class="mainContainer">
+    <?php
+    require_once("../Server/Database.php");
+    $db = new Database();
+    error_reporting(0);
+    $postedName = $_POST['name'];
+    $postedOption = $_POST['option'];
+    error_reporting(1);
+    if ($postedName != "" && $postedOption != "") {
+        if (strcmp($postedOption, "enable")==0) {
+            $db->enableSwitch($postedName);
+        } else if (strcmp($postedOption, "disable")==0) {
+            $db->disableSwitch($postedName);
+        }
+    }
+    $info = $db->getAllSwitchsNames();
+    $switchesNameList = explode(",", $info);
+    sort($switchesNameList);
+    echo "<h1>Control Panel: all switches </h1>";
+    $i = 0;
+    foreach ($switchesNameList as $a) {
+        if (strlen($a)>1) {
+            echo "<form action='CheckAllSwitches.php' method='post' id='" . $i . "' >";
+            echo "<label>***** Switch name: " . $a . " *****</label><br>";
+            if ($db->isSwitchEnabled($a)) {
+                echo "<input type='hidden' name='name' value=" . $a . ">";
+                echo '<u>Enable</u> <input type="radio" id="r1" name="option" checked="true" value="enable" onchange="activeForm(' . $i . ')">';
+                echo 'Disabled <input type="radio" id="r2" name="option" value="disable" onchange="activeForm(' . $i . ')">';
+            } else {
+                echo "<input type='hidden' name='name' value=" . $a . ">";
+                echo 'Enable <input type="radio" id="r1" name="option" value="enable" onchange="activeForm(' . $i . ')">';
+                echo '<u>Disabled</u> <input type="radio" id="r2" name="option" checked="true" value="disable" onchange="activeForm(' . $i . ')">';
             }
-            $info = $db->getAllSwitchsNames();
-            $switchesNameList = explode(",", $info);
-            echo "<h1>Control Panel: all switches: </h1>";
-            $i = 0;
-            foreach ($switchesNameList as $a) {
-                if (strlen($a > 1)) {
-                    echo "<form action='CheckAllSwitches.php' method='post' id='" . $i . "' >";
-                    echo "<label >Switch name: " . $a . "</label><br>";
-                    if ($db->isSwitchEnabled($a)) {
-                        echo "<input type='hidden' name='name' value=" . $a . ">";
-                        echo 'Enable <input type="radio" id="r1" name="option" checked="true" value="enable" onchange="activeForm(' . $i . ')">';
-                        echo 'Disabled <input type="radio" id="r2" name="option" value="disable" onchange="activeForm(' . $i . ')">';
-                    } else {
-                        echo "<input type='hidden' name='name' value=" . $a . ">";
-                        echo 'Enable <input type="radio" id="r1" name="option" value="enable" onchange="activeForm(' . $i . ')">';
-                        echo 'Disabled <input type="radio" id="r2" name="option" checked="true" value="disable" onchange="activeForm(' . $i . ')">';
-                    }
-                    $i++;
-                }
-                echo "</form>";
-            }
-            ?>
-            <br>
-        </div>
+            $i++;
+        }
+        echo "</form>";
+    }
+    ?>
+    <br>
+</div>
+    <a href="../index.php" style="float: left;margin: 0 48% 1.5% 48%">
+        <button><img src="Css/home-button.jpg" width="75" height="75"></button>
+    </a>
 
-        <a href="../index.php" style="float: left;margin: 0 48% 1.5% 48%">
-            <button class="home"><img src="Css/home.png" width="75" height="75"></button>
-        </a>
-        <script>
-            function activeForm(form) {
-                alert("Update sucessfully!");
-                document.getElementById(form).submit();
-            }
-        </script>
+<script>
+    function activeForm(form) {
+//        alert("Update sucessfully!");
+        document.getElementById(form).submit();
+    }
+</script>
 
         <footer class="mainFooter">
             <p>Copyright &copy; <span>Ethernot Team</span></p>

@@ -1,2 +1,3 @@
-sw1,3Com,SuperStack 3,123123213,123123123,e8775608d84f4370401fb1588f005e07e878dd20,ssh/
-1234,3Com,Switch 4210,1234,123,123,telnet/
+df,3Com,SuperStack 3,sdf,ssdfsfd,011c945f30ce2cbafc452f39840f025693339c42,ssh
+sd,DELL,PowerConnect 5548P,asd,asdasd,78c0f1ad029ce0ddb24d4048f6f9d7e924682eea,telnet/
+asdf,,,sdfd,sdfsdf,00a7fe0ed0ae0bacc4a29a0fd20e5b243a363c95,ssh/

@@ -34,17 +34,21 @@
             echo "<form action='ModifySwitch.php' method='post'>";
             $actualInfo = str_replace(" ", "*", $actualInfo);
             echo "<input type='hidden' name='info' value=" . $actualInfo . ">";
-            echo "<input class='submit' type='submit' value='Modify switch'>";
+            echo "<input type='submit' value='Modify switch'>";
             echo "</form>";
 
             echo "<form action='SwitchHistory.php' method='post'>";
             echo "<input type='hidden' name='name' value='" . $actualInfoArray[0] . "'>";
-            echo "<input class='submit' type='submit' value='Switch History'>";
+            echo "<input type='submit' value='Switch History'>";
             echo "</form>";
 
             echo "<form action='GetConfigurationNow.php' method='post'>";
+            echo "<input type='hidden' name='ip' value='" . $actualInfoArray[3] . "'>";
+            echo "<input type='hidden' name='username' value='" . $actualInfoArray[4] . "'>";
+            echo "<input type='hidden' name='password' value='" . $actualInfoArray[5] . "'>";
             echo "<input type='hidden' name='name' value='" . $actualInfoArray[0] . "'>";
-            echo "<input class='submit' type='submit' value='Get configuration now'>";
+            echo "<input type='hidden' name='access' value='" . $actualInfoArray[6] . "'>";
+            echo "<input type='submit' value='Get configuration now'>";
             echo "</form>";
 
             //histori
@@ -52,7 +56,7 @@
             ?>
         </div>
         <a href="../index.php" style="float: left;margin: 0 48% 1.5% 48%">
-            <button class="home"><img src="Css/home.png" width="75" height="75"></button>
+            <button><img src="Css/home-button.jpg" width="75" height="75"></button>
         </a>
 
         <script>
