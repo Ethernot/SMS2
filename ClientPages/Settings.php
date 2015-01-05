@@ -14,21 +14,29 @@
         <?php
         require_once("../Server/Database.php");
         $db = new Database();
-        $currentHour = explode(":", $db->getConfigsTime())[0];
-        $currentMinutes = explode(":", $db->getConfigsTime())[1];
+        $nextUpdate = $db->getNextUpdate();
+        $year = explode("-",explode(" ", $nextUpdate)[0])[0];
+        $month = explode("-",explode(" ", $nextUpdate)[0])[1];
+        $day = explode("-",explode(" ", $nextUpdate)[0])[2];
+        $hour = explode(":",explode(" ", $nextUpdate)[1])[0];
+        $minute = explode(":",explode(" ", $nextUpdate)[1])[1];
+
         $currentInterval = $db->getConfigsInterval();
         ?>
 
         <div class="mainContainer">
+
+            <?php
+            ?>
             <h1>Settings:</h1>
             <form action="saveSettings.php" method="post">
-                <label>Time of the backup: </label>
-                <input type="time" name="time" value=<?php echo $currentHour . ':' . $currentMinutes ?>>
+                <label>Date Of next update: </label>
+                <input type="datetime-local" name = "nextUpdate" value=<?php echo $year."-".$month."-".$day."T".$hour.":".$minute?>>
                 <br>
-                <label>Interval of the backup(Hours): </label>
+                <label>Interval of the backups(days): </label>
                 <select name="interval">
                     <?php
-                    for ($i = 1; $i < 97; $i++) {
+                    for ($i = 1; $i < 91; $i++) {
                         if ($i == $currentInterval) {
                             echo '<option selected="selected" value=' . $i . '>' . $i . '</option>';
                         } else {

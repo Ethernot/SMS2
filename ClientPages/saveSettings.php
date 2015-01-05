@@ -11,11 +11,12 @@
         <?php
         require_once("../Server/Database.php");
         echo "<h1>Settings Saves with sucess</h1>";
-        $time = $_POST['time'];
+        $nextUpdate = $_POST['nextUpdate'];
         $interval = $_POST['interval'];
         $db = new Database();
-        $db->setConfigsTime($time);
         $db->setConfigsInterval($interval);
+        $db->setLastUpdate(date("Y-m-d H:i"));
+        $db->setNextUpdate(str_replace("T"," ",$nextUpdate));
         ?>
 
     </div>
