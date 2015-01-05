@@ -16,7 +16,7 @@
         $db = new Database();
         $db->setConfigsInterval($interval);
         $db->setLastUpdate(date("Y-m-d H:i"));
-        $db->setNextUpdate(str_replace("T","",$nextUpdate));
+        $db->setNextUpdate(str_replace("T"," ",$nextUpdate));
         ?>
 
     </div>

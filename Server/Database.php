@@ -421,6 +421,7 @@ class Database
     public function setNextUpdate($nextUpdate)
     {
         $this->nextUpdate = $nextUpdate;
+        $this->saveInfo();
     }
 
     public function getConfigsInterval()
