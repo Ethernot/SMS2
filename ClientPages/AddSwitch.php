@@ -74,7 +74,7 @@
         echo '<label>Username: </label><input type="text" name="username" required="true">';
         echo '<br><label>Password: </label><input type="password" name="password" id="pass" required="true" oninput="activeButtons()">';
         echo "<br>";
-        echo "<input type='submit' value='Add switch' id='as' disabled='true'>";
+        echo "<input class='submit' type='submit' value='Add switch' id='as' disabled='true'>";
         echo "</form>";
     } else {
         echo "No switches inserted <br><br>";
@@ -83,7 +83,7 @@
 </div>
 
     <a href="../index.php" style="float: left;margin: 0 48% 1.5% 48%">
-        <button><img src="Css/home-button.jpg" width="75" height="75"></button>
+        <button class="home"><img src="Css/home.png" width="75" height="75"></button>
     </a>
 
 <script language="javascript">

@@ -32,7 +32,7 @@
                 $config2 = $db->getConfigInfo($name, $conf2);
                 echo "<div>";
                 echo "<h2>Configuration " . $conf1 . ":</h2>";
-//        echo $config1;
+
                 for ($i = 0; $i < strlen($config1); $i++) {
                     if ($i >= strlen($config2)) {
                         echo '<font color=#ff0000 size="4">' . $config1[$i] . '</font>';
@@ -63,7 +63,7 @@
             ?>
         </div>
         <a href="../index.php" style="float: left;margin: 0 48% 1.5% 48%">
-            <button><img src="Css/home-button.jpg" width="75" height="75"></button>
+            <button class="home"><img src="Css/home.png" width="75" height="75"></button>
         </a>
         <footer class="mainFooter">
             <p>Copyright &copy; <span>Ethernot Team</span></p>

@@ -165,15 +165,15 @@
         echo '<input type="hidden" name="conf1" value="' . $switchesConfsList[$conf1Selected - 1] . '">';
         echo '<input type="hidden" name="conf2" value="' . $switchesConfsList2[$conf2Selected - 1] . '">';
         if ($conf1Selected > 0 && $conf2Selected < 1) {
-            echo "<input type='submit' value='Check configuration'> ";
+            echo "<input class='submit' type='submit' value='Check configuration'> ";
         } else {
             if ($conf2Selected > 0 && $conf1Selected > 0) {
-                echo "<input type='submit' value='Compare configurations'> ";
+                echo "<input class='submit' type='submit' value='Compare configurations'> ";
             } else {
                 if ($conf1Selected > 0) {
-                    echo "<input type='submit' value='Check configuration'> ";
+                    echo "<input class='submit' type='submit' value='Check configuration'> ";
                 } else {
-                    echo "<input type='submit' disabled='true' value='Check configuration'> ";
+                    echo "<input class='submit' type='submit' disabled='true' value='Check configuration'> ";
 
                 }
             }
@@ -189,7 +189,7 @@
 
 
         <a href="../index.php" style="float: left;margin: 0 48% 1.5% 48%">
-            <button><img src="Css/home-button.jpg" width="75" height="75"></button>
+            <button class="home"><img src="Css/home.png" width="75" height="75"></button>
         </a>
 
         <script>

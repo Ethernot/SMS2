@@ -20,7 +20,7 @@
 
     </div>
     <a href="../index.php" style="float: left;margin: 0 48% 1.5% 48%">
-        <button><img src="Css/home-button.jpg" width="75" height="75"></button>
+        <button class="home"><img src="Css/home.png" width="75" height="75"></button>
     </a>
     <footer class="mainFooter">
         <p>Copyright &copy; <span>Ethernot Team</span></p>

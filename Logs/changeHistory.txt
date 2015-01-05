@@ -1,8 +1,14 @@
-2015-01-04 07:59:00pm disabled Switch 1234
-2015-01-04 07:59:01pm enabled Switch 1234
-2015-01-04 07:59:02pm disabled Switch 1234
-2015-01-04 07:59:03pm enabled Switch 1234
-2015-01-04 07:59:04pm disabled Switch 1234
-2015-01-04 10:52:17pm Added a new Switch with the name sw1
-2015-01-04*22:58:25*Changed detail from switchsw1
-2015-01-04*23:00:59*enabled Switch 1234
+2015-01-05*01:32:45am*disabled Switch 1234
+2015-01-05*01:32:46am*enabled Switch 1234
+2015-01-05*01:32:47am*disabled Switch 1234
+2015-01-05*01:32:48am*enabled Switch 1234
+2015-01-05*01:32:49am*disabled Switch 1234
+2015-01-05*01:32:49am*enabled Switch 1234
+2015-01-05*01:32:50am*disabled Switch 1234
+2015-01-05*01:32:51am*enabled Switch 1234
+2015-01-05*01:32:51am*disabled Switch 1234
+2015-01-05*01:32:52am*enabled Switch 1234
+2015-01-05*01:32:53am*disabled Switch 1234
+2015-01-05*01:32:53am*enabled Switch 1234
+2015-01-05*01:32:54am*disabled Switch 1234
+2015-01-05*01:32:55am*enabled Switch 1234

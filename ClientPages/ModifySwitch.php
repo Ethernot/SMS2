@@ -89,7 +89,7 @@
             }
             echo "<label>user: </label> <input type='text' name='newUser' value=" . $actualInfoArray[4] . "> <br>";
             echo "<label>Password: </label> <input type='password' name='newPassWord' value=" . $actualInfoArray[5] . "> <br>";
-            echo "<input type='submit' value='Save Changes'>";
+            echo "<input class='submit' type='submit' value='Save Changes'>";
             echo "</form>"
             ?>
 
@@ -111,7 +111,7 @@
         </div>
 
         <a href="../index.php" style="float: left;margin: 0 48% 1.5% 48%">
-            <button><img src="Css/home-button.jpg" width="75" height="75"></button>
+            <button class="home"><img src="Css/home.png" width="75" height="75"></button>
         </a>
         <footer class="mainFooter">
             <p>Copyright &copy; <span>Ethernot Team</span></p>

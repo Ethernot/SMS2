@@ -41,7 +41,7 @@
             ?>
             <br>
             <a href="../index.php">
-                <button><img src="Css/home-button.jpg" width = "75" height="75"></button>
+                <button class="home"><img src="Css/home.png" width="75" height="75"></button>
             </a>
         </div>
         <footer class="mainFooter">

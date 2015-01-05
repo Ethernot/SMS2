@@ -1,39 +1,45 @@
 @font-face {
     font-family: Titlefont;
-    src: url(FetteMikado.ttf);
+    src: url(Smush_demo.otf);
 }
 
 @font-face {
     font-family: mainFont;
-    src: url(DJB%20Tweenybopper.ttf);
+    src: url(latto3.ttf);
 }
 
 @font-face {
     font-family: selectFont;
-    src: url(FetteMikado.ttf);
+    src: url(latto2.ttf);
 }
 
 @font-face {
     font-family: inputFont;
-    src: url(DJB%20Constance%20Beauregard.ttf);
+    src: url(All%20Things%20Pink.ttf);
 }
 
 @font-face {
     font-family: submitFont;
-    src: url(YoursTruly.ttf);
+    src: url(button.ttf);
+}
+
+@font-face {
+    font-family: h1Font;
+    src: url(latto.ttf);
 }
 
 body {
-    background-color: #00CC66;
-    /*background-image: url("10876573_10152965849142288_705157134_o.jpg");*/
-    color: #00CC00;
+    /*background-color: #00CC66;*/
+    background-image: url(porno69.png);
+    background-attachment: fixed;
+    color: #0066FF;
 }
 
 .mainHeader {
     width: 99%;
     float: left;
-    background-color: #DAFFCD;
-    border: #005000 solid;
+    background-color: #DDF1FF;
+    border: #000 solid;
     border-radius: 5px;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
@@ -63,8 +69,8 @@ body {
     border-radius: 5px;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
-    border: #005000 solid;
-    background-color: #DAFFCD;
+    border: #000 solid;
+    background-color: #fff;
 }
 
 .mainFooter p {
@@ -79,9 +85,10 @@ body {
 }
 
 .mainContainer {
+    color: #5E8AA0;
     float: left;
     width: 40%;
-    background-color: #DAFFCD;
+    background-color: #F3FAFF;
     text-align: center;
     font-family: mainFont;
     font-size: 25px;
@@ -89,7 +96,7 @@ body {
     border-radius: 5px;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
-    border: #005000 solid;
+    border: #000 solid;
     margin: 2.5% 30% 1% 30%;
 }
 
@@ -100,15 +107,14 @@ body {
 
 .mainContainer ul li a:link, .mainContainer ul li a:visited {
     text-decoration: none;
-    color: #33D633;
+    color: #000;
 }
 
 .mainContainer ul li a:hover {
     text-decoration: none;
-    background-color: #33D633;
-    color: white;
+    background-color: #000;
+    color: #F3FAFF;
 }
-
 
 .logs {
     text-align: center;
@@ -118,10 +124,11 @@ body {
 }
 
 table {
+    width: 70%;
     background-color: white;
-    border: #005000 solid;
+    border: #000 solid;
     border-collapse: collapse;
-    margin: 2.5% 30%;
+    margin: 1.5% 15% 0 15%;
 }
 
 table td {
@@ -129,13 +136,12 @@ table td {
     color: black;
     padding: 5px 2%;
     font-size: 1.3em;
-    border-left: 1px solid #005000;
-    border-right: 1px solid #005000;
+    border-left: 1px solid #000;
+    border-right: 1px solid #000;
 }
 
 table td:first-child {
     border-left: none;
-    width: 20%;
 }
 
 table td:last-child {
@@ -144,16 +150,16 @@ table td:last-child {
 
 th {
     font-family: Calibri;
-    font-weight: bold;
-    color: white;
-    background-color: #00CC00;
+    font-weight: bolder;
+    color: #000;
+    background-color: #8DC6FF;
     opacity: 0.8;
     height: 30px;
     font-size: 2.4em;
     padding: 5px;
-    border-left: 1px solid #005000;
-    border-right: 1px solid #005000;
-    border-bottom: 1px solid #005000;
+    border-left: 1px solid #000;
+    border-right: 1px solid #000;
+    border-bottom: 1px solid #000;
 }
 
 table th:first-child {
@@ -165,7 +171,7 @@ table th:last-child {
 }
 
 tr:nth-child(2n) {
-    background-color: #ECECD8;
+    background-color: #CFE2FF;
 }
 
 label {
@@ -173,38 +179,85 @@ label {
     margin: 1%;
 }
 
-.submit {
+.submit, button {
+    font-weight: bold;
     margin: 2.5%;
     font-family: submitFont;
-    font-size: 1.1em;
+    font-size: 0.8em;
+    background-color: #94DBFF;
+    color: #2B2B2B;
+    border: none;
+}
+
+.submit:hover, button:hover {
+    color: #94DBFF;
+    background-color: #2B2B2B;
+}
+
+.home {
+    -webkit-transition-duration: 0.8s;
+    -moz-transition-duration: 0.8s;
+    -o-transition-duration: 0.8s;
+    transition-duration: 0.8s;
+    -webkit-transition-property: -webkit-transform;
+    -moz-transition-property: -moz-transform;
+    -o-transition-property: -o-transform;
+    transition-property: transform;
+    overflow:hidden;
+    background-color: inherit;
+}
+.home:hover {
+    background-color: inherit;
+    -webkit-transform:rotate(180deg);
+    -moz-transform:rotate(180deg);
+    -o-transform:rotate(180deg);
+}
+
+button:disabled , .submit:disabled {
+    color: gray;
+    background-color: #D1E8FF;
 }
 
 select {
     width: 268px;
-    font-size: 1.4em;
+    font-size: 0.9em;
     font-family: selectFont;
     line-height: 1;
-    border: solid black;
+    /*border: solid black;*/
     border-radius: 5px;
     height: 44px;
-    background: url(https://cdn2.iconfinder.com/data/icons/picol-vector/32/arrow_sans_down-16.png) no-repeat right #ddd;
+    background: url(arrow.png) no-repeat right #ddd;
     -webkit-appearance: none;
     background-position-x: 244px;
-    background-color: white;
+    background-color: #D2DEE4;
 }
 
+select:disabled {
+    width: 268px;
+    font-size: 0.9em;
+    font-family: selectFont;
+    line-height: 1;
+    /*border: solid black;*/
+    border-radius: 5px;
+    height: 44px;
+    background: url(arrow.png) no-repeat right #ddd;
+    -webkit-appearance: none;
+    background-position-x: 244px;
+    background-color: #EFF3F5;
+}
 
 input {
     font-family: inputFont;
-}
-
-.time {
-    background-color: blue;
+    font-size: 1em;
 }
 
 h1 {
     color: black;
     text-transform: capitalize;
+    font-family: h1Font;
 }
 
+a {
+    text-decoration: none;
+}
 
