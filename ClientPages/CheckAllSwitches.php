@@ -53,7 +53,7 @@
         }
         echo "</form>";
     }
-    if (count($dis) > 1) {
+    if (count($dis) > 1 ) {
         echo "<h2>Disabled switches: </h2>";
     }
     foreach ($dis as $a) {

@@ -333,6 +333,18 @@ class Database
         return $switchsList;
     }
 
+    public function getAllSwitchsNames()
+    {
+        $switchsList = "";
+        foreach ($this->enabledSwitchs as $s) {
+            $switchsList .= explode(",", $s)[0] . ",";
+        }
+        foreach ($this->disabledSwitchs as $s) {
+            $switchsList .= explode(",", $s)[0] . ",";
+        }
+        return $switchsList;
+    }
+
     public function isSwitchEnabled($name)
     {
         foreach ($this->enabledSwitchs as $s) {
