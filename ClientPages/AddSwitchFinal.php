@@ -23,6 +23,7 @@
             $newUser = $_POST['username'];
             $newPassword = $_POST['password'];
             $db = new Database();
+
             $encryptPw = sha1($newPassword);
             $db->savePassword($newPassword, $encryptPw);
             $db->addNewSwitch($newBrand, $newModel, $newName, $newIp, $newAccess, $newUser, $encryptPw);

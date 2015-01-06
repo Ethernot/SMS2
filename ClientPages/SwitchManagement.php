@@ -86,11 +86,11 @@
         }
         echo '</select>';
         echo "<br>";
-        if ($modelSelected > 0) {
-            echo "<input class='submit' type='submit' value='Check Switch' id='cs' >";
-        } else {
+//        if ($modelSelected > 0) {
+//            echo "<input class='submit' type='submit' value='Check Switch' id='cs' >";
+//        } else {
             echo "<input class='submit' name='cs' type='submit' value='Check Switch' id='cs' disabled='true'>";
-        }
+//        }
         echo "</form>";
     } else {
         echo "<label>No switches available</label><br>";

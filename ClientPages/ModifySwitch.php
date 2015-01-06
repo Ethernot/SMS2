@@ -83,13 +83,13 @@
     echo "<form action='ModifySwitchFinal.php' method='post' name='ff'>";
     echo "<input type='hidden' name='oldName' value=" . $actualInfoArray[0] . ">";
     $auxNewBrand = str_replace(" ", "*", $switchesBrandList[$brandSelected - 1]);
-    if ($auxNewBrand == "") {
-        $auxNewBrand = $actualInfoArray[1];
+    if($brandSelected==-1){
+        $auxNewBrand = str_replace(" ", "*",$actualInfoArray[1]);
     }
 
     $auxNewModel = str_replace(" ", "*", $switchesModelList[$modelSelected - 1]);
-    if ($auxNewModel == "") {
-        $auxNewModel = $actualInfoArray[2];
+    if($modelSelected==-1){
+        $auxNewModel = str_replace(" ", "*",$actualInfoArray[2]);
     }
 
     echo "<input type='hidden' name='newBrand' value=" . $auxNewBrand . ">";
