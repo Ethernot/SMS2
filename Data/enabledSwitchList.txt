@@ -1,1 +1,2 @@
-name,3Com,Switch 5500G,ip,user,9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684,ssh
+name11df,SMC,8124PL2,ip11,user11,0808f4f387948ca6e398f4030e8ee19d74c5883e,ssh
+sdfaww,3Com,SuperStack 3,sdfsdfww,sdfsdfww,a72f4f48f9fbd2e86f0b670ddb40323a5e848a3b,telnet

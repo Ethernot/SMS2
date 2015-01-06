@@ -16,7 +16,7 @@
             $name = $_POST['name'];
             require_once("../Server/Database.php");
             $db = new Database();
-            echo "<h1>Switch " . $name . "History: </h1>";
+            echo "<h1>Switch " . $name . " History: </h1>";
             $infoArray = $db->getSwitchHistory($name);
             if (count($infoArray) > 1) {
                 foreach ($infoArray as $a) {
@@ -34,7 +34,7 @@
                     }
                 }
             } else {
-                echo "<h2> No history: </h2>";
+                echo "<h2> No history </h2>";
             }
             ?>
         </div>

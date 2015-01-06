@@ -3,8 +3,6 @@
 	require_once "ssh.php";
 	require_once "telnet.php";	
  	require_once "date.php";
-	$secondsWait = 3223;
-	header("Refresh:$secondsWait");
 	#returns the array of files on the given directory
 	function listDirectory($dir){
 		$l=scandir($dir);

@@ -61,7 +61,6 @@
     echo '<input type="hidden" name="brand" value="' . $brandSelected . '">';
     echo "<input type='hidden' name='info' value=" . $oldInfo . ">";
     echo "<label> Model: </label>";
-    echo $modelSelected;
     echo '<select name="model" id="sel2" required="true" oninput="activeButtons()">';
     echo '<option disabled="disabled">Please select a model</option>';
     $i = 1;
@@ -70,11 +69,10 @@
             $a=substr($a,1,strlen($a));
         }
         if (strlen($a) > 1) {
-                echo "<option>sgdf: ".strcmp($actualInfoArray[2],$a)."</option>";
             if ($modelSelected == $i || ($actualInfoArray[2] == $a && $modelSelected == -1)) {
                 echo '<option selected="selected" value=' . $i++ . '>' . $a . '</option>';
             } else {
-                echo '<option value=' . $i++ . '>|' . $a . '|</option>';
+                echo '<option value=' . $i++ . '>' . $a . '</option>';
             }
         }
     }
@@ -88,13 +86,11 @@
     if ($auxNewBrand == "") {
         $auxNewBrand = $actualInfoArray[1];
     }
-//    echo "|" . $auxNewBrand . "|<br>";
 
     $auxNewModel = str_replace(" ", "*", $switchesModelList[$modelSelected - 1]);
     if ($auxNewModel == "") {
         $auxNewModel = $actualInfoArray[2];
     }
-//    echo "|" . $auxNewModel . "|<br>";
 
     echo "<input type='hidden' name='newBrand' value=" . $auxNewBrand . ">";
     echo "<input type='hidden' name='newModel' value=" . $auxNewModel . ">";

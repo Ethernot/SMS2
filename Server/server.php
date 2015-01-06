@@ -1,32 +1,27 @@
 <?php
-require_once "validatefiles.php";
+	require_once "validatefiles.php";
+	require_once "getconfigsauto.php";
+	$secondsWait = 30;
+	header("Refresh:$secondsWait");
 
-/*reads a file to obtain the configurations of each switch.
-  after this,updates the configurations for each one,if needed.
-*/
-function updateswitches()
-{
-
-    $switches = array();
-    mkdir("Switch", 0777, true);
-
-    $file = fopen("../Data/enabledSwitchList.txt", "r") or die("Unable to open file!");
-
-    while (($line = fgets($file)) !== false) {
-        $aux = explode(",", $line);
-        array_push($switches, $aux);
-    }
-    fclose($file);
-
-    for ($i = 0; $i < count($switches); $i++) {
-        $aux = $switches[$i];
-        $name = $aux[0];
-        $ip = $aux[3];
-        $user = $aux[4];
-        $pass = $aux[5];
-        $type = $aux[6];
-        updateLogs($name, $ip, $user, $pass, $type);
-    }
-}
-updateswitches();
+	$db = new Database();
+	$actual = date("Y-m-d H:i");
+	$actual = str_replace("pm", "", $actual);
+	$actual = str_replace("am", "", $actual);
+	
+	$next = $db->getNextUpdate();
+		
+	$cmpactual = new DateTime($actual);
+	$cmpnext = new DateTime($next);
+	if ($cmpactual<=$cmpnext)
+	{
+		updateswitches();
+		/*echo "ola";		
+		//$db->setLastUpdate($actual);
+		echo "ola";
+		$next = date('m-d-Y',strtotime($date1 . "+".$db->getConfigsInterval." days"); 
+		echo $next;
+		//$db->setNextUpdate($actual);*/
+	}
+	//date('m-d-Y',strtotime($date1 . "+".$db->getConfigsInterval." days"));
 ?>

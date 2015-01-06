@@ -138,6 +138,7 @@ class Database
         $this->saveInfo();
         $date = date("Y-m-d") . '*' . date("H:i:sa");
         $date = str_replace("pm", "", $date);
+	$date = str_replace("am", "", $date);
         $this->saveToLogs($date . "*Added a new Switch with the name " . $name);
     }
 
@@ -152,7 +153,8 @@ class Database
         }
         $this->saveInfo();
         $date = date("Y-m-d") . '*' . date("H:i:sa");
-        $date = str_replace("pm", "", $date);
+	$date = str_replace("pm", "", $date);
+	$date = str_replace("am", "", $date);
         $this->saveToLogs($date . "*disabled Switch " . $name);
     }
 
@@ -169,6 +171,7 @@ class Database
 
         $date = date("Y-m-d") . '*' . date("H:i:sa");
         $date = str_replace("pm", "", $date);
+	$date = str_replace("am", "", $date);
         $this->saveToLogs($date . "*enabled Switch " . $name);
     }
 
@@ -227,6 +230,7 @@ class Database
 
         $date = date("Y-m-d") . '*' . date("H:i:sa");
         $date = str_replace("pm", "", $date);
+	$date = str_replace("am", "", $date);
         $this->saveToLogs($date . "*Changed detail from switch" . $oldName);
 
         $this->saveInfo();
@@ -285,7 +289,7 @@ class Database
                     return explode(",", $i)[0];
             }
         }
-        return "merda";
+        return "";
     }
     public function deletePassword($pass)
     {
@@ -307,13 +311,19 @@ class Database
 
 //    ------------PASSWORDS
 
-    public function getAllSwitchsNames()
+    public function getAllDisabledSwitchsNames()
+    {
+        $switchsList = "";
+        foreach ($this->disabledSwitchs as $s) {
+            $switchsList .= explode(",", $s)[0] . ",";
+        }
+        return $switchsList;
+    }
+
+    public function getAllEnabledSwitchsNames()
     {
         $switchsList = "";
         foreach ($this->enabledSwitchs as $s) {
-            $switchsList .= explode(",", $s)[0] . ",";
-        }
-        foreach ($this->disabledSwitchs as $s) {
             $switchsList .= explode(",", $s)[0] . ",";
         }
         return $switchsList;

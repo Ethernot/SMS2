@@ -22,17 +22,6 @@
     $newUser = $_POST['newUser'];
     $newPassWord = $_POST['newPassWord'];
     $oldPassWord = $_POST['oldPassWord'];
-    //
-    //            echo "<br>".$oldName;
-    //            echo "<br>".$newBrand;
-    //            echo "<br>".$newModel;
-    //            echo "<br>".$newName;
-    //            echo "<br>".$newIp;
-    //            echo "<br>".$newAccess;
-    //            echo "<br>".$newUser;
-    //            echo "<br>".$newPassWord;
-    //            echo "<br>".$oldPassWord;
-
     require_once("../Server/Database.php");
     $passWordFinal = sha1($newPassWord);
     $db = new Database();

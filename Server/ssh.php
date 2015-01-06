@@ -6,6 +6,9 @@ require_once("Database.php");
 function sshswitch($ip, $username, $password, $switchname, $flag)
 {
     $db = new Database();
+    echo $password."<br>";
+    $password = $db->getPwSha1($password);
+    echo $password."<br>";
     $ssh = new SSH2($ip);
     $ssh->auth($username, $password);
     $ssh->exec("display current");
@@ -26,7 +29,7 @@ function sshswitch($ip, $username, $password, $switchname, $flag)
     } else {
         $date = date("Y-m-d") . '*' . date("h:i:sa");
         $db->saveToLogs($date."*ERROR:Backup of switch " . $switchname . "by ssh without sucess");
-	sendaMail("ERROR:Backup of switch " . $switchname . "by ssh without sucess");
+	sendaMail("ERROR:Backup_of_switch_" . $switchname . "_by_ssh_without_sucess");
 	return 0;
     }
 }

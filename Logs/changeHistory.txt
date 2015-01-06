@@ -88,3 +88,33 @@
 2015-01-05*20:16:38*Changed detail from switchfjtggfcg
 2015-01-05*20:23:10*Added a new Switch with the name aaaa
 2015-01-05*21:05:26*Added a new Switch with the name name
+2015-01-05*22:48:08*Changed detail from switchname
+2015-01-05*22:48:39*Added a new Switch with the name sdfa
+2015-01-05*22:49:00*Changed detail from switchsdfa
+2015-01-05*22:52:13*Added a new Switch with the name cgngcn
+2015-01-05*23:34:20*Changed detail from switchname11
+2015-01-05*23:42:25*disabled Switch sdfaww
+2015-01-05*23:59:59*disabled Switch cgngcn
+2015-01-06*00:00:49*enabled Switch sdfaww
+2015-01-06*00:00:51*disabled Switch name11df
+2015-01-06*00:00:55*disabled Switch sdfaww
+2015-01-06*00:03:29*enabled Switch cgngcn
+2015-01-06*00:03:32*enabled Switch name11df
+2015-01-06*00:03:34*enabled Switch sdfaww
+2015-01-06*00:03:36*disabled Switch cgngcn
+2015-01-06*00:03:39*disabled Switch name11df
+2015-01-06*00:03:40*disabled Switch sdfaww
+2015-01-06*00:03:58*enabled Switch cgngcn
+2015-01-06*00:04:07*disabled Switch cgngcn
+2015-01-06*00:04:11*enabled Switch name11df
+2015-01-06*00:04:12*disabled Switch name11df
+2015-01-06*00:04:15*enabled Switch sdfaww
+2015-01-06*00:04:17*disabled Switch sdfaww
+2015-01-06*00:04:49*enabled Switch cgngcn
+2015-01-06*00:04:54*disabled Switch cgngcn
+2015-01-06*00:04:56*enabled Switch name11df
+2015-01-06*00:04:57*enabled Switch sdfaww
+2015-01-06*00:04:58*enabled Switch cgngcn
+2015-01-06*00:05:01*disabled Switch cgngcn
+2015-01-06*00:05:03*disabled Switch sdfaww
+2015-01-06*00:05:07*enabled Switch sdfaww
