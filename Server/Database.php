@@ -15,6 +15,7 @@ class Database
     public $configsInterval;
     public $nextUpdate;
     public $lastUpdate;
+    public $maxLife;
 
 
     function __construct()
@@ -78,6 +79,8 @@ class Database
             $this->lastUpdate = explode("\n", $info)[0];
             $this->nextUpdate = explode("\n", $info)[1];
             $this->configsInterval = explode("\n", $info)[2];
+            $this->maxLife = explode("\n", $info)[3];
+
         }
 
 
@@ -108,6 +111,7 @@ class Database
         fwrite($file, $this->lastUpdate . "\n");
         fwrite($file, $this->nextUpdate . "\n");
         fwrite($file, $this->configsInterval . "\n");
+        fwrite($file, $this->maxLife . "\n");
         fclose($file);
     }
 
@@ -440,6 +444,15 @@ class Database
         $this->configsInterval = $configsInterval;
     }
 
+    public function getMaxLife()
+    {
+        return $this->maxLife;
+    }
+
+    public function setMaxLife($maxLife)
+    {
+        $this->maxLife = $maxLife;
+    }
 
 
 

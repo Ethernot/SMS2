@@ -21,7 +21,7 @@
             $db = new Database();
             echo "<h1>Switch " . $name . ":</h1>";
             if ($conf1 != "" && $conf2 == "") {
-                echo "<div>";
+                echo "<div style='width: 70%;margin: 0 15%'>";
                 echo "<h1>Configuration " . $conf1 . ":</h1>";
                 $a = $db->getConfigInfo($name, $conf1);
                 echo $a;
