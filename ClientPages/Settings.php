@@ -22,6 +22,7 @@
         $minute = explode(":",explode(" ", $nextUpdate)[1])[1];
 
         $currentInterval = $db->getConfigsInterval();
+        $currentMaxLife = $db->getMaxLife();
         ?>
 
         <div class="mainContainer">
@@ -38,6 +39,19 @@
                     <?php
                     for ($i = 1; $i < 91; $i++) {
                         if ($i == $currentInterval) {
+                            echo '<option selected="selected" value=' . $i . '>' . $i . '</option>';
+                        } else {
+                            echo '<option value=' . $i . '>' . $i . '</option>';
+                        }
+                    }
+                    ?>
+                </select>
+                <br>
+                <label>Max life of Configurations(days): </label>
+                <select name="maxLife">
+                    <?php
+                    for ($i = 1; $i < 91; $i++) {
+                        if ($i == $currentMaxLife) {
                             echo '<option selected="selected" value=' . $i . '>' . $i . '</option>';
                         } else {
                             echo '<option value=' . $i . '>' . $i . '</option>';

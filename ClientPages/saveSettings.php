@@ -13,9 +13,11 @@
         echo "<h1>Settings Saves with sucess</h1>";
         $nextUpdate = $_POST['nextUpdate'];
         $interval = $_POST['interval'];
+        $maxLife = $_POST['maxLife'];
         $db = new Database();
         $db->setConfigsInterval($interval);
         $db->setLastUpdate(date("Y-m-d H:i"));
+        $db->setMaxLife($maxLife);
         $db->setNextUpdate(str_replace("T"," ",$nextUpdate));
         ?>
 
